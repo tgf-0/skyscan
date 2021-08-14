@@ -1,0 +1,3 @@
+t="test"
+:test=t
+ifer=="test0"then:test=1end
