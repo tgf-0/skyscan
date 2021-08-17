@@ -1,18 +1,18 @@
-:receiverpitch=0 :navinfo="Inactive"
-if:skyscan!=1thengoto17end b=0 c=0 d=0 e=0 f=0 g=0
-h=1000000-:signalstrength i=0
-if:receivercurrentpitch>180thengoto11end if:ssreset==1thengoto18end
-:receiverpitch=i if:receivercurrentpitch!=i thengoto5end
-if:message=="origin_north" and b==0thenb=h e=i goto10end
-if:message=="origin_west" and c==0thenj=k f=i goto10end
-if:message=="origin_east" and d==0thenl=k g=i goto10end
+if:skyscan!=0thengoto4end :receiverpitch=0
+:navinfo="Inactive. Last Scan:" :navinfo="\nN Dist:"+:last_n
+:navinfo+="\nW Dist:"+:last_w :navinfo+="\nE Dist:"+:last_e
+if:skyscan!=1thengoto1end b=0 c=0 d=0 e=0 f=0 g=0
+h=1000000-:signalstrength i=:receivercurrentpitch
+ifi>180thengoto13end if:ssreset==1 or :skyscan==0thengoto13end
+:receiverpitch=i if:receivercurrentpitch!=i thengoto7end
+if:message=="origin_north" and b==0thenb=h e=i goto12end
+if:message=="origin_west" and c==0thenj=k f=i goto12end
+if:message=="origin_east" and d==0thenl=k g=i goto12end
 :navinfo="Scanning, RCP: "+:receivercurrentpitch
-i+=15 goto4
-if:receivercurrentpitch<0thengoto18end
-if:message!=0 or :receivercurrentpitch<=180thengoto14end
-:navinfo="No transmissions found. \nMove ship." i=0 goto18
+i+=15 goto6
+if:receivercurrentpitch<0theni=181 :receiverpitch=181end
+if:message!=0 or :receivercurrentpitch<=180thengoto16end
+:navinfo="No transmissions found. \nMove ship." i=0 :skyscan=0 goto1
 :navinfo="\nN Dist:"+b+", Angle:"+e
 :navinfo+="\nW Dist:"+c+", Angle:"+f
-:navinfo+="\nE Dist:"+d+", Angle:"+g goto2
-if:ssreset!=1thengoto1end
-:skyscan=0 :receiverpitch=0 :ssreset=0 goto1
+:navinfo+="\nE Dist:"+d+", Angle:"+g goto4

@@ -1,16 +1,24 @@
-// Need receiver with standard fields, angle set to 15
-// Textpanel set to :navinfo,
-// a 'SkyScan' button style 1
-// a 'SSReset' button style 1
+// Requirements: 
+//  - Nav Receiver with standard fields, 
+//     - Angle set to 15
+// - A textpanel set to :navinfo
+// - A button set tp SkyScan
+//     - Style 1
+// - [WIP] Memory chip with fields: 
+//     - :last_n
+//     - :last_e
+//     - :last_w
 
-
-// Set :receiverpitch 0, Inactive status
-:receiverpitch=0
-:navinfo="Inactive"
+if :skyscan==0 then
+	:receiverpitch=0
+	:navinfo="Inactive. Last Scan:"
+	:navinfo="\nN Dist:"+:last_n
+	:navinfo+="\nW Dist:"+:last_w
+	:navinfo+="\nE Dist:"+:last_e
+end
 
 // When activated
 while :skyscan==1 do
-	// i=:receivercurrentpitch
 	n_dist=0
 	w_dist=0
 	e_dist=0
@@ -20,15 +28,17 @@ while :skyscan==1 do
 	signal_dist=1000000-:signalstrength
 	i=:receivercurrentpitch
 	while i<=180 do
-		if :ssreset==1 then goto r end
+		// Break for reset or skyscan off
+		if :ssreset==1 or :skyscan==0 then break end
 		// Pitch receiver 15 degrees
 		p> :receiverpitch=i
 		
-		// Wait for receiver to move
+		// Wait for receiver to actuate
 		if :receivercurrentpitch!=i then
 			goto p
 		end
-		// Capture messages, if any, and if not previously captured
+		
+		// Capture messages, if any, and only if not previously captured
 		if :message=="origin_north" and n_dist==0 then
 			n_dist=signal_dist
 			n_angle=i
@@ -43,21 +53,18 @@ while :skyscan==1 do
 		end
 		i+=15
 	end
-	if i<0 then goto r end
+	if :receivercurrentpitch<0 then
+		i=181
+		:receiverpitch=181
+	end
 	if :message==0 and :receivercurrentpitch>180 then
 		:navinfo="No transmissions found. \nMove ship."
 		i=0
-		goto r
-		break
+		:skyscan=0
+		break 
 	else
 		:navinfo="\nN Dist:"+n_dist+", Angle:"+n_angle
 		:navinfo+="\nW Dist:"+w_dist+", Angle:"+w_angle
 		:navinfo+="\nE Dist:"+e_dist+", Angle:"+e_angle
 	end
-end
-// Reset
-if :ssreset==1 then
-r>	:skyscan=0
-	:receiverpitch=0
-	:ssreset=0
 end
