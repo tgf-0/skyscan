@@ -1,12 +1,12 @@
 // Need receiver with standard fields, angle set to 1
-// Textpanel set to :rstatus,
+// Textpanel set to :navinfo,
 // a 'SkyScan' button style 1
 // a 'SSReset' button style 1
 
 
 // Set :receiverpitch 0, Inactive status
 :receiverpitch=0
-:rstatus="Inactive"
+:navinfo="Inactive"
 
 // When activated
 while :skyscan==1 do
@@ -38,13 +38,13 @@ while :skyscan==1 do
 			e=dist
 			e_angle=i
 		else
-			:rstatus="Scanning, RCP: "+:receivercurrentpitch
+			:navinfo="Scanning, RCP: "+:receivercurrentpitch
 		end
 		i++
 	end
-	:rstatus="\nN Dist:"+n_dist+", Angle:"+n_angle
-	:rstatus+="\nW Dist:"+w_dist+", Angle:"+w_angle
-	:rstatus+="\nE Dist:"+e_dist+", Angle:"+e_angle
+	:navinfo="\nN Dist:"+n_dist+", Angle:"+n_angle
+	:navinfo+="\nW Dist:"+w_dist+", Angle:"+w_angle
+	:navinfo+="\nE Dist:"+e_dist+", Angle:"+e_angle
 	if :ssreset==1 then 
 		:skyscan=0
 		:ssreset--

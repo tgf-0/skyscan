@@ -1,4 +1,4 @@
-:receiverpitch=0 :rstatus="Inactive"
+:receiverpitch=0 :navinfo="Inactive"
 if:skyscan!=1thengoto1end b=0 c=0 d=0 e=0 f=0 g=0
 h=1000000-:signalstrength i=0
 if:receivercurrentpitch>180thengoto11end :receiverpitch=i
@@ -6,9 +6,9 @@ if:receivercurrentpitch!=i thengoto11end
 if:message=="origin_north" and b==0thenb=h e=i goto10end
 if:message=="origin_west" and c==0thenj=k f=i goto10end
 if:message=="origin_east" and d==0thenl=k g=i goto10end
-:rstatus="Scanning, RCP: "+:receivercurrentpitch
+:navinfo="Scanning, RCP: "+:receivercurrentpitch
 i++ goto4
-:rstatus="\nN Dist:"+b+", Angle:"+e
-:rstatus+="\nW Dist:"+c+", Angle:"+f
-:rstatus+="\nE Dist:"+d+", Angle:"+g
+:navinfo="\nN Dist:"+b+", Angle:"+e
+:navinfo+="\nW Dist:"+c+", Angle:"+f
+:navinfo+="\nE Dist:"+d+", Angle:"+g
 if:ssreset==1then:skyscan=0 :ssreset--end goto2
