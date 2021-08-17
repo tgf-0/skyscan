@@ -1,0 +1,42 @@
+// Need receiver with standard fields, 
+// Textpanel set to :rstatus,
+// a 'SkyScan' button style 1
+
+
+// Set :receiverpitch 0, Inactive status
+:receiverpitch=0
+:rstatus="Inactive"
+define i=:receivercurrentpitch
+define n=0
+define w=0
+define e=0
+define n_angle=0
+define w_angle=0
+define e_angle=0
+define dist=1000000-:signalstrength
+// When activated
+while :skyscan==1 do
+	if i>0 then i=0 end
+	while i<180 do
+		// Turn receiver 1 degree
+		:receiverpitch=i
+		// Wait for receiver to turn
+		if :receiverpitch!=:receivercurrentpitch then break end
+		// Capture messages, if any
+		if :message=="origin_north" then
+			:n=:dist
+			:n_angle=i
+		else if :message=="origin_west" then
+			:w=:dist
+			:w_angle=i
+		else if :message=="origin_east" then
+			:e=:dist
+			:e_angle=i
+		else
+			:rstatus="Scanning, RCP: "+:receivercurrentpitch
+		end
+		:rstatus="\nN Dist:"+:n+", Angle:"+:n_angle+"\nW Dist:"+:w+", Angle:"+:w_angle+"\nE Dist:"+:e+", Angle:"+:e_angle
+		i++
+	end
+	:skyscan=0
+end
