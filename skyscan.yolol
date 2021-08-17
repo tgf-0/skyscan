@@ -9,8 +9,9 @@ if:message=="origin_west" and c==0thenj=k f=i goto11end
 if:message=="origin_east" and d==0thenl=k g=i goto11end
 :navinfo="Scanning, RCP: "+:receivercurrentpitch
 i+=15 goto4
-if:message!=0thengoto14end
-:navinfo="No transmissions found. \nMove ship." goto17
+if:message!=0 or :receivercurrentpitch!=180thengoto15end
+:navinfo="No transmissions found. \nMove ship." i=0 :ssreset=1
+:receiverpitch=0 goto18
 :navinfo="\nN Dist:"+b+", Angle:"+e
 :navinfo+="\nW Dist:"+c+", Angle:"+f
 :navinfo+="\nE Dist:"+d+", Angle:"+g
