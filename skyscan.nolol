@@ -1,4 +1,4 @@
-// Need receiver with standard fields, angle set to 1
+// Need receiver with standard fields, angle set to 15
 // Textpanel set to :navinfo,
 // a 'SkyScan' button style 1
 // a 'SSReset' button style 1
@@ -20,7 +20,11 @@ while :skyscan==1 do
 	signal_dist=1000000-:signalstrength
 	i=0
 	while :receivercurrentpitch<=180 do
-		// Pitch receiver 1 degree
+		if :ssreset==1 then 
+			:skyscan=0
+			break
+		end
+		// Pitch receiver 15 degrees
 		:receiverpitch=i
 		
 		// Wait for receiver to move
@@ -40,13 +44,17 @@ while :skyscan==1 do
 		else
 			:navinfo="Scanning, RCP: "+:receivercurrentpitch
 		end
-		i++
+		i+=15
 	end
-	:navinfo="\nN Dist:"+n_dist+", Angle:"+n_angle
-	:navinfo+="\nW Dist:"+w_dist+", Angle:"+w_angle
-	:navinfo+="\nE Dist:"+e_dist+", Angle:"+e_angle
+	if :message==0 then 
+		:navinfo="No transmissions found. \nMove ship."
+	else 
+		:navinfo="\nN Dist:"+n_dist+", Angle:"+n_angle
+		:navinfo+="\nW Dist:"+w_dist+", Angle:"+w_angle
+		:navinfo+="\nE Dist:"+e_dist+", Angle:"+e_angle
+	end
 	if :ssreset==1 then 
 		:skyscan=0
-		:ssreset--
+		:ssreset=0
 	end
 end
