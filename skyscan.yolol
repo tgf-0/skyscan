@@ -2,8 +2,8 @@
 if:skyscan!=1thengoto1end b=0 c=0 d=0 e=0 f=0 g=0
 h=1000000-:signalstrength i=0
 if:receivercurrentpitch>180thengoto12end
-if:ssreset==1then:skyscan=0 goto12end :receiverpitch=i
-if:receivercurrentpitch!=i thengoto12end
+if:ssreset==1then:skyscan=0 goto12end
+:receiverpitch=i if:receivercurrentpitch!=i thengoto6end
 if:message=="origin_north" and b==0thenb=h e=i goto11end
 if:message=="origin_west" and c==0thenj=k f=i goto11end
 if:message=="origin_east" and d==0thenl=k g=i goto11end

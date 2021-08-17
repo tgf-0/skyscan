@@ -25,11 +25,11 @@ while :skyscan==1 do
 			break
 		end
 		// Pitch receiver 15 degrees
-		:receiverpitch=i
+		p> :receiverpitch=i
 		
 		// Wait for receiver to move
 		if :receivercurrentpitch!=i then
-			break 
+			goto p
 		end
 		// Capture messages, if any, and if not previously captured
 		if :message=="origin_north" and n_dist==0 then
