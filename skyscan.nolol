@@ -20,7 +20,11 @@ while :skyscan==1 do
 	signal_dist=1000000-:signalstrength
 	i=0
 	while :receivercurrentpitch<=180 do
-		if :ssreset==1 then goto r end
+		if :ssreset==1 then 
+			:skyscan=0
+			:ssreset=0
+			break
+		end
 		// Pitch receiver 15 degrees
 		p> :receiverpitch=i
 		
@@ -43,18 +47,19 @@ while :skyscan==1 do
 		end
 		i+=15
 	end
-	if :message==0 and :receivercurrentpitch==180 then
+	if :message=="0" and :receivercurrentpitch==180 then
 		:navinfo="No transmissions found. \nMove ship."
 		i=0
 		:ssreset=1
 		:receiverpitch=0
+		break
 	else
 		:navinfo="\nN Dist:"+n_dist+", Angle:"+n_angle
 		:navinfo+="\nW Dist:"+w_dist+", Angle:"+w_angle
 		:navinfo+="\nE Dist:"+e_dist+", Angle:"+e_angle
 	end
 	if :ssreset==1 then
-		r> :skyscan=0
+		:skyscan=0
 		:ssreset=0
 		break
 	end
