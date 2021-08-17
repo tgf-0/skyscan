@@ -1,9 +1,15 @@
 # skyscan.nolol
 
-Need receiver with standard fields, angle set to 1  
-Textpanel set to :rstatus,  
-a 'SkyScan' button style 1  
-a 'SSReset' button style 1  
+Requirements:   
+*Nav Receiver with standard fields,   
+**Angle set to 15  
+*A textpanel set to :navinfo  
+*A button set tp SkyScan  
+**Style 1  
+**[WIP] Memory chip with fields:   
+**:last_n  
+**:last_e  
+**:last_w  
 
 
 
