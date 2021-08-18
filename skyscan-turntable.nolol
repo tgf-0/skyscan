@@ -32,7 +32,7 @@ if :skyscan==0 then
 	:receiverpitch=0
 	:sstr=0
 	:listenangle=30
-	dmsg="Inactive. Last Scan:"
+	dmsg="Inactive. Last:"
 	dmsg+=:chipfield1+"\n"+:chipfield2+"\n:"+:chipfield3+"\n"+:chipfield4
 	:navinfo=dmsg
 end
@@ -76,10 +76,11 @@ while :skyscan==1 do
 
 		// Sometimes receiverpitch goes past 180 and becomes negative. Why cant they just use 0 to 360 like normal humans?
 		if :receivercurrentpitch<0 then
-			i=91
-			:receiverpitch=91
+			i=0
+			:receiverpitch=0
 		end
-		if :receivercurrentpitch>=91 then 
+		if :receivercurrentpitch>90 then 
+			i=0
 			break
 		end
 	end
