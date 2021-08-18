@@ -1,3 +1,4 @@
-if:locmark!=1thengoto1end
+if:locmark!=1thengoto4end
 b="\nN:"+:last_n+"KM\nW:"+:last_w+"KM\nE:"+:last_e+"KM" :origin_19=b
-:locmark=0 goto1
+:locmark=0
+if:ssreset==1then:last_e=0 :last_n=0 :last_w=0 :ssreset=0end goto1

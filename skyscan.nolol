@@ -1,13 +1,14 @@
 // Requirements: 
-//  *Nav Receiver with standard fields, 
+// * Nav Receiver with standard fields, 
 //     **Angle set to 15
 // *A textpanel set to :navinfo
-// *A button set tp SkyScan
+// *A button set to SkyScan
 //     **Style 1
-// **[WIP] Memory chip with fields: 
+// *[WIP] Memory chip with fields: 
 //     **:last_n
 //     **:last_e
 //     **:last_w
+// * A reset button set to :ssreset 
 
 if :skyscan==0 then
 	:receiverpitch=0
