@@ -11,8 +11,9 @@
 
 if :skyscan==0 then
 	:receiverpitch=0
-	:navinfo="Inactive. Last Scan:"
-	:navinfo="\nN:"+:last_n+"\nW:"+:last_w+"\nE:"+:last_e
+	dmsg="Inactive. Last Scan:"
+	dmsg+="\nN:"+:last_n+"\nW:"+:last_w+"\nE:"+:last_e
+	:navinfo=dmsg
 end
 
 // When activated

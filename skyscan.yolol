@@ -1,19 +1,18 @@
-if:skyscan!=0thengoto4end :receiverpitch=0
-:navinfo="Inactive. Last Scan:"
-:navinfo="\nN:"+:last_n+"\nW:"+:last_w+"\nE:"+:last_e
-if:skyscan!=1thengoto1end b=0 c=0 d=0 e=0 f=0 g=0
-h=:receivercurrentpitch
-ifh>180thengoto16end if:skyscan==0thengoto16end
-:receiverpitch=h if:receivercurrentpitch!=h thengoto7end
-if:message!="origin_north" or b!=0thengoto10end b=:signalstrength-i
-e=h :last_n=b goto15
-if:message!="origin_west" or c!=0thengoto12end c=:signalstrength-i f=h
-:last_w=c goto15
-if:message!="origin_east" or d!=0thengoto14end d=:signalstrength-i g=h
-:last_e=d goto15
+if:skyscan!=0thengoto3end :receiverpitch=0 b="Inactive. Last Scan:"
+b+="\nN:"+:last_n+"\nW:"+:last_w+"\nE:"+:last_e :navinfo=b
+if:skyscan!=1thengoto1end c=0 d=0 e=0 f=0 g=0 h=0
+i=:receivercurrentpitch
+ifi>180thengoto15end if:skyscan==0thengoto15end
+:receiverpitch=i if:receivercurrentpitch!=i thengoto6end
+if:message!="origin_north" or c!=0thengoto9end c=:signalstrength-j
+f=i :last_n=c goto14
+if:message!="origin_west" or d!=0thengoto11end d=:signalstrength-j g=i
+:last_w=d goto14
+if:message!="origin_east" or e!=0thengoto13end e=:signalstrength-j h=i
+:last_e=e goto14
 :navinfo="Scanning, RCP: "+:receivercurrentpitch
-h+=15 goto6
-if:receivercurrentpitch<0thenh=181 :receiverpitch=181end
-if:message!=0 or b!=0 or c!=0 or d!=0thengoto19end
-:navinfo="No transmissions found. \nMove ship." h=0 :skyscan=0 goto1
-if:receivercurrentpitch>=180then:skyscan=0end goto4
+i+=15 goto5
+if:receivercurrentpitch<0theni=181 :receiverpitch=181end
+if:message!=0 or c!=0 or d!=0 or e!=0thengoto18end
+:navinfo="No transmissions found. \nMove ship." i=0 :skyscan=0 goto1
+if:receivercurrentpitch>=180then:skyscan=0end goto3
