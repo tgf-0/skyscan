@@ -47,7 +47,7 @@ while :skyscan==1 do
 	while j>=-90 and j<=90 do
 		:sstr=j
 		// Begin vertical scan
-		while i<=120 do
+		while i<=90 do
 			// Break for reset or skyscan off
 			if :skyscan==0 then break end
 			
@@ -76,10 +76,10 @@ while :skyscan==1 do
 
 		// Sometimes receiverpitch goes past 180 and becomes negative. Why cant they just use 0 to 360 like normal humans?
 		if :receivercurrentpitch<0 then
-			i=121
-			:receiverpitch=121
+			i=91
+			:receiverpitch=91
 		end
-		if :receivercurrentpitch>=120 then 
+		if :receivercurrentpitch>=91 then 
 			break
 		end
 	end
