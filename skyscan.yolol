@@ -1,5 +1,5 @@
 if:skyscan!=0thengoto3end :receiverpitch=0 b="Inactive. Last Scan:"
-b+="km\nN:"+:last_n+"km\nW:"+:last_w+"km\nE:"+:last_e :navinfo=b
+b+="\nN:"+:last_n+"KM\nW:"+:last_w+"KM\nE:"+:last_e+"KM" :navinfo=b
 if:skyscan!=1thengoto1end c=0 d=0 e=0 f=0 g=0 h=0
 i=:receivercurrentpitch
 ifi>180thengoto15end if:skyscan==0thengoto15end

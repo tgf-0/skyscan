@@ -12,7 +12,7 @@
 if :skyscan==0 then
 	:receiverpitch=0
 	dmsg="Inactive. Last Scan:"
-	dmsg+="km\nN:"+:last_n+"km\nW:"+:last_w+"km\nE:"+:last_e
+	dmsg+="\nN:"+:last_n+"KM\nW:"+:last_w+"KM\nE:"+:last_e+"KM"
 	:navinfo=dmsg
 end
 
