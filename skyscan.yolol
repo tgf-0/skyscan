@@ -1,13 +1,13 @@
 if:skyscan!=0thengoto4end :receiverpitch=0
-:navinfo="Inactive. Last Scan:" :navinfo="\nN Dist:"+:last_n
-:navinfo+="\nW Dist:"+:last_w :navinfo+="\nE Dist:"+:last_e
+:navinfo="Inactive. Last Scan:"
+:navinfo="\nN:"+:last_n+"\nW:"+:last_w+"\nE:"+:last_e
 if:skyscan!=1thengoto1end b=0 c=0 d=0 e=0 f=0 g=0
 h=1000000-:signalstrength i=:receivercurrentpitch
 ifi>180thengoto13end if:ssreset==1 or :skyscan==0thengoto13end
 :receiverpitch=i if:receivercurrentpitch!=i thengoto7end
-if:message=="origin_north" and b==0thenb=h e=i goto12end
-if:message=="origin_west" and c==0thenj=k f=i goto12end
-if:message=="origin_east" and d==0thenl=k g=i goto12end
+if:message=="origin_north" and b==0thenb=h e=i :last_n=h goto12end
+if:message=="origin_west" and c==0thenj=k f=i :last_w=h goto12end
+if:message=="origin_east" and d==0thenl=k g=i :last_e=h goto12end
 :navinfo="Scanning, RCP: "+:receivercurrentpitch
 i+=15 goto6
 if:receivercurrentpitch<0theni=181 :receiverpitch=181end

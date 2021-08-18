@@ -12,9 +12,7 @@
 if :skyscan==0 then
 	:receiverpitch=0
 	:navinfo="Inactive. Last Scan:"
-	:navinfo="\nN Dist:"+:last_n
-	:navinfo+="\nW Dist:"+:last_w
-	:navinfo+="\nE Dist:"+:last_e
+	:navinfo="\nN:"+:last_n+"\nW:"+:last_w+"\nE:"+:last_e
 end
 
 // When activated
@@ -42,12 +40,15 @@ while :skyscan==1 do
 		if :message=="origin_north" and n_dist==0 then
 			n_dist=signal_dist
 			n_angle=i
+			:last_n=signal_dist
 		else if :message=="origin_west" and w_dist==0 then
 			w=dist
 			w_angle=i
+			:last_w=signal_dist
 		else if :message=="origin_east" and e_dist==0 then
 			e=dist
 			e_angle=i
+			:last_e=signal_dist
 		else
 			:navinfo="Scanning, RCP: "+:receivercurrentpitch
 		end
