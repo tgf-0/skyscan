@@ -1,0 +1,92 @@
+// Turntable version with more comprehensive scanning
+// Turntable must have device fields: 
+//  - SSTR (Replacing TurretRotation)
+//  - SSCTR (Replace TurretCurrentRotation)
+// Memory chip must be default named (ChipField1, ChipField2, etc)
+
+macro store(index, data) block
+	if index==1 then :chipfield1=data end
+
+	// If we get the same data as previous, discard it
+	if index==2 and data!=:chipfield1 then 
+		:chipfield2=data
+	else 
+		signal-- 
+	end
+
+	if index==3 and data!=:chipfield2 then 
+		:chipfield3=data
+	else 
+		signal-- 
+	end
+
+	if index==4 and data!=:chipfield3 then 
+		:chipfield4=data
+	else 
+		signal-- 
+	end
+
+end
+// If not active, reset everything
+if :skyscan==0 then
+	:receiverpitch=0
+	:sstr=0
+	dmsg="Inactive. Last Scan:"
+	dmsg+=:chipfield1+"\n"+:chipfield2+"\n:"+:chipfield3+"\n"+:chipfield4
+	:navinfo=dmsg
+end
+
+// When activated
+while :skyscan==1 do
+	i=0
+	j=-90
+	signal=0
+	
+	// Begin from Turntable -90° and Pitch 0°
+	while j>=-90 and j<=90 do
+		:sstr=j
+		// Begin vertical scan
+		while i<=120 do
+			// Break for reset or skyscan off
+			if :skyscan==0 then break end
+			
+			// Pitch receiver 
+			p> :receiverpitch=i
+			
+			// Wait for receiver to actuate
+			if :receivercurrentpitch!=i or :ssctr!=j then
+				goto p
+			end
+			
+			// Capture messages
+			if :message!=0 then
+				signal++
+				dist=(1000000 - :signalstrength)/1000
+				mdata=:message+", "+dist+"KM, "+:angle+"°"
+				store(signal,mdata)
+			else
+				:navinfo="Scanning "+:ssctr+"°, "+:receivercurrentpitch+"°"
+			end
+			// Pitch in 30° increments
+			i+=30
+		end
+		// Turn in 30° increments
+		j+=30
+
+		// Sometimes receiverpitch goes past 180 and becomes negative. Why cant they just use 0 to 360 like normal humans?
+		if :receivercurrentpitch<0 then
+			i=121
+			:receiverpitch=121
+		end
+		if :receivercurrentpitch>=120 then 
+			break
+		end
+	end
+	// If we past 90 much we're probably done with the scan, break out
+	if j>90 or j<-90 then 
+		:skyscan=0	
+		break
+	end
+	// If you get to the end and there are no signals, move ya ship!
+	if j>90 and signal==0 then :navinfo="No signals found. Rescan." end
+end

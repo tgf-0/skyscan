@@ -1,0 +1,19 @@
+if:skyscan!=0thengoto5end :receiverpitch=0 :sstr=0
+b="Inactive. Last Scan:"
+b+=:chipfield1+"\n"+:chipfield2+"\n:"+:chipfield3+"\n"+:chipfield4
+:navinfo=b
+if:skyscan!=1thengoto1end c=0 d=-90 e=0
+ifd<-90 or d>90thengoto18end :sstr=d
+ifc>120thengoto16end if:skyscan==0thengoto16end
+:receiverpitch=c if:receivercurrentpitch!=c or :ssctr!=d thengoto8end
+if:message==0thengoto14end e++ f=(1000000-:signalstrength)/1000
+g=:message+", "+f+"KM, "+:angle+"Â°" ife==1then:chipfield1=g end
+ife==2 and g!=:chipfield1 then:chipfield2=g elseh--end
+ife==3 and g!=:chipfield2 then:chipfield3=g elseh--end
+ife==4 and g!=:chipfield3 then:chipfield4=g elseh--end goto15
+:navinfo="Scanning "+:ssctr+"Â°, "+:receivercurrentpitch+"Â°"
+c+=30 goto7
+d+=30 if:receivercurrentpitch<0thenc=121 :receiverpitch=121end
+if:receivercurrentpitch>=120thengoto18end goto6
+ifd>90 or d<-90then:skyscan=0 goto1end
+ifd>90 and e==0then:navinfo="No signals found. Rescan."end goto5
