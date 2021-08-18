@@ -1,15 +1,17 @@
-# skyscan.nolol
+# SkyScan - Basic coordinate reference system
 
-Requirements:   
-*Nav Receiver with standard fields,   
-**Angle set to 15  
-*A textpanel set to :navinfo  
-*A button set tp SkyScan  
-**Style 1  
-**[WIP] Memory chip with fields:   
-**:last_n  
-**:last_e  
-**:last_w  
+## Requirements:   
+- Nav Receiver with standard fields,   
+    - `Angle` set to 20  
+- A textpanel with device field set to `navinfo`  
+- A button with device field set to `SkyScan`  
+    - `Style` 1  
+- Turret Turntable with device fields:  
+    - SSTT  
+- Memory chip with fields:   
+    - `last_n`  
+    - `last_e`  
+    - `last_w`  
 
 
 

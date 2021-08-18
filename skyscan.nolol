@@ -1,14 +1,16 @@
-// Requirements: 
-// * Nav Receiver with standard fields, 
-//     **Angle set to 20
-// *A textpanel set to :navinfo
-// *A button set to SkyScan
-//     **Style 1
-// *[WIP] Memory chip with fields: 
-//     **:last_n
-//     **:last_e
-//     **:last_w
-// * A reset button set to :ssreset 
+// - Requirements: 
+// 	- Nav Receiver with standard fields, 
+// 		- `Angle` set to 20
+// 	- A textpanel with device field set to `navinfo`
+// 	- A button with device field set to `SkyScan`
+// 		- `Style` 1
+// 	- Turret Turntable with device fields:
+// 		- SSTT
+// - Memory chip with fields: 
+// 	- `last_n`
+// 	- `last_e`
+// 	- `last_w`
+
 
 if :skyscan==0 then
 	:receiverpitch=0
@@ -25,12 +27,12 @@ while :skyscan==1 do
 	n_ang=0
 	w_ang=0
 	e_ang=0
-	// signal_dist=1000000-:signalstrength
 	i=:receivercurrentpitch
 	while i<=120 do
 		// Break for reset or skyscan off
 		if :skyscan==0 then break end
-		// Pitch receiver 15 degrees
+		
+		// Pitch receiver 
 		p> :receiverpitch=i
 		
 		// Wait for receiver to actuate
