@@ -1,8 +1,11 @@
 // Marks a location in memory
 if :locmark==1 then
-	mark="\nN:"+:last_n+"KM\nW:"+:last_w+"KM\nE:"+:last_e+"KM"
 	// Change this to what you want
-	:origin_19=mark
+	:o19n=:last_n
+	:o19e=:last_e
+	:o19w=:last_w
+	mark="\nN:"+:o19n+"KM\nW:"+:o19w+"KM\nE:"+:o19e+"KM"
+    :origin_19=mark
 	:locmark=0
 end
 if :ssreset==1 then
