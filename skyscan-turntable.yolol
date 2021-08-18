@@ -1,4 +1,4 @@
-if:skyscan!=0thengoto5end :receiverpitch=0 :sstr=0
+if:skyscan!=0thengoto5end :receiverpitch=0 :sstr=0 :listenangle=30
 b="Inactive. Last Scan:"
 b+=:chipfield1+"\n"+:chipfield2+"\n:"+:chipfield3+"\n"+:chipfield4
 :navinfo=b

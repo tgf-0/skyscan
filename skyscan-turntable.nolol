@@ -31,6 +31,7 @@ end
 if :skyscan==0 then
 	:receiverpitch=0
 	:sstr=0
+	:listenangle=30
 	dmsg="Inactive. Last Scan:"
 	dmsg+=:chipfield1+"\n"+:chipfield2+"\n:"+:chipfield3+"\n"+:chipfield4
 	:navinfo=dmsg
