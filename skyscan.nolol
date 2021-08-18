@@ -1,6 +1,6 @@
 // Requirements: 
 // * Nav Receiver with standard fields, 
-//     **Angle set to 15
+//     **Angle set to 20
 // *A textpanel set to :navinfo
 // *A button set to SkyScan
 //     **Style 1
@@ -27,7 +27,7 @@ while :skyscan==1 do
 	e_ang=0
 	// signal_dist=1000000-:signalstrength
 	i=:receivercurrentpitch
-	while i<=180 do
+	while i<=120 do
 		// Break for reset or skyscan off
 		if :skyscan==0 then break end
 		// Pitch receiver 15 degrees
@@ -54,18 +54,18 @@ while :skyscan==1 do
 		else
 			:navinfo="Scanning, RCP: "+:receivercurrentpitch
 		end
-		i+=15
+		i+=20
 	end
 	if :receivercurrentpitch<0 then
 		i=181
-		:receiverpitch=181
+		:receiverpitch=121
 	end
 	if :message==0 and n_dist==0 and w_dist==0 and e_dist==0 then
 		:navinfo="No transmissions found. \nMove ship."
 		i=0
 		:skyscan=0
 		break 
-	else if :receivercurrentpitch>=180 then 
+	else if :receivercurrentpitch>=120 then 
 		:skyscan=0
 	end
 end
