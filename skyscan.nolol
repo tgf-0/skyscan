@@ -20,14 +20,14 @@ while :skyscan==1 do
 	n_dist=0
 	w_dist=0
 	e_dist=0
-	n_angle=0
-	w_angle=0
-	e_angle=0
-	signal_dist=1000000-:signalstrength
+	n_ang=0
+	w_ang=0
+	e_ang=0
+	// signal_dist=1000000-:signalstrength
 	i=:receivercurrentpitch
 	while i<=180 do
 		// Break for reset or skyscan off
-		if :ssreset==1 or :skyscan==0 then break end
+		if :skyscan==0 then break end
 		// Pitch receiver 15 degrees
 		p> :receiverpitch=i
 		
@@ -38,17 +38,17 @@ while :skyscan==1 do
 		
 		// Capture messages, if any, and only if not previously captured
 		if :message=="origin_north" and n_dist==0 then
-			n_dist=signal_dist
-			n_angle=i
-			:last_n=signal_dist
+			n_dist=:signalstrength - signal_dist
+			n_ang=i
+			:last_n=n_dist
 		else if :message=="origin_west" and w_dist==0 then
-			w=dist
-			w_angle=i
-			:last_w=signal_dist
+			w_dist=:signalstrength - signal_dist
+			w_ang=i
+			:last_w=w_dist
 		else if :message=="origin_east" and e_dist==0 then
-			e=dist
-			e_angle=i
-			:last_e=signal_dist
+			e_dist=:signalstrength - signal_dist
+			e_ang=i
+			:last_e=e_dist
 		else
 			:navinfo="Scanning, RCP: "+:receivercurrentpitch
 		end
@@ -64,8 +64,8 @@ while :skyscan==1 do
 		:skyscan=0
 		break 
 	else
-		:navinfo="\nN Dist:"+n_dist+", Angle:"+n_angle
-		:navinfo+="\nW Dist:"+w_dist+", Angle:"+w_angle
-		:navinfo+="\nE Dist:"+e_dist+", Angle:"+e_angle
+		:navinfo="\nN :"+n_dist+", Ang:"+n_ang
+		:navinfo+="\nW :"+w_dist+", Ang:"+w_ang
+		:navinfo+="\nE :"+e_dist+", Ang:"+e_ang
 	end
 end
