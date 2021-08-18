@@ -58,14 +58,12 @@ while :skyscan==1 do
 		i=181
 		:receiverpitch=181
 	end
-	if :message==0 and :receivercurrentpitch>180 then
+	if :message==0 and n_dist==0 and w_dist==0 and e_dist==0 then
 		:navinfo="No transmissions found. \nMove ship."
 		i=0
 		:skyscan=0
 		break 
-	else
-		:navinfo="\nN :"+n_dist+", Ang:"+n_ang
-		:navinfo+="\nW :"+w_dist+", Ang:"+w_ang
-		:navinfo+="\nE :"+e_dist+", Ang:"+e_ang
+	else if :receivercurrentpitch>=180 then 
+		:skyscan=0
 	end
 end

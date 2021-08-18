@@ -14,7 +14,6 @@ if:message!="origin_east" or d!=0thengoto14end d=:signalstrength-i g=h
 :navinfo="Scanning, RCP: "+:receivercurrentpitch
 h+=15 goto6
 if:receivercurrentpitch<0thenh=181 :receiverpitch=181end
-if:message!=0 or :receivercurrentpitch<=180thengoto19end
+if:message!=0 or b!=0 or c!=0 or d!=0thengoto19end
 :navinfo="No transmissions found. \nMove ship." h=0 :skyscan=0 goto1
-:navinfo="\nN :"+b+", Ang:"+e :navinfo+="\nW :"+c+", Ang:"+f
-:navinfo+="\nE :"+d+", Ang:"+g goto4
+if:receivercurrentpitch>=180then:skyscan=0end goto4
