@@ -26,12 +26,25 @@ ORIGIN_E="origin_east"
 ORIGIN_W="origin_west"
 
 macro store(index, data, dist) block
-	if data==ORIGIN_N then :chipfield1="N:"+dist+";"+index end
-
-	if data==ORIGIN_E then :chipfield2="E:"+dist+";"+index end
-	
-	if data==ORIGIN_W then :chipfield3="W:"+dist+";"+index end
-
+	if data==ORIGIN_N then 
+		sdata="N:"+dist+";"+index
+		if :chipfield1!=sdata then 
+			:chipfield1=sdata
+			n++
+		end
+	else if data==ORIGIN_E then
+		sdata="E:"+dist+";"+index
+		if :chipfield2!=sdata then 
+			:chipfield2=sdata
+			n++
+		end
+	else if data==ORIGIN_W then
+		sdata="W:"+dist+";"+index
+		if :chipfield3!=sdata then 
+			:chipfield3=sdata
+			n++
+		end
+	end
 end
 // If not active, reset everything
 if :skyscan==0 then
@@ -62,8 +75,7 @@ while :skyscan==1 do
 			
 			// Pitch receiver 
 			p> :receiverpitch=i
-			:navstatus="Scanning:"+:ssctr+"deg,"+:receivercurrentpitch+"deg"
-			:navstatus+="\n"+n+" signals found"
+			:navstatus="Scanning:\n"+n+" signals found"
 			
 			// Wait for receiver to actuate
 			if :receivercurrentpitch!=i or :ssctr!=j then
@@ -72,10 +84,8 @@ while :skyscan==1 do
 			
 			// Capture messages from origin north, east or west
 			if :message==ORIGIN_N or :message==ORIGIN_E or :message==ORIGIN_W then
-				n++
 				dist=(1000000 - :signalstrength)/1000
-				mdata=:message
-				store(scan_index,mdata,dist)
+				store(scan_index,:message,dist)
 			end
 			// Pitch in 30° increments
 			i+=30

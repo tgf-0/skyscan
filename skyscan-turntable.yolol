@@ -4,15 +4,15 @@ if:skyscan!=0thengoto4end :receiverpitch=0 :sstr=0 :listenangle=30
 if:skyscan!=1thengoto1end f=0 g=-90 e=0 :chipfield4++ h=:chipfield4
 ifg<-90 or g>90thengoto19end :sstr=g
 iff>90thengoto17end if:skyscan==0thengoto17end
-:receiverpitch=f
-:navstatus="Scanning:"+:ssctr+"deg,"+:receivercurrentpitch+"deg"
-:navstatus+="\n"+e+" signals found"
+:receiverpitch=f :navstatus="Scanning:\n"+e+" signals found"
 if:receivercurrentpitch!=f or :ssctr!=g thengoto7end
-if:message!=b and :message!=c and :message!=d thengoto16end e++
-i=(1000000-:signalstrength)/1000 j=:message
-ifj==k then:chipfield1="N:"+i+";"+h end
-ifj==l then:chipfield2="E:"+i+";"+h end
-ifj==m then:chipfield3="W:"+i+";"+h end
+if:message!=b and :message!=c and :message!=d thengoto16end
+i=(1000000-:signalstrength)/1000 if:message!=j thengoto12end
+k="N:"+i+";"+h if:chipfield1!=k then:chipfield1=k l++end goto16
+if:message!=m thengoto14end k="E:"+i+";"+h
+if:chipfield2!=k then:chipfield2=k l++end goto16
+if:message!=n thengoto16end k="W:"+i+";"+h
+if:chipfield3!=k then:chipfield3=k l++end
 f+=30 goto6
 g+=30 if:receivercurrentpitch<0thenf=0 :receiverpitch=0end
 if:receivercurrentpitch>=90thenf=0end goto5
