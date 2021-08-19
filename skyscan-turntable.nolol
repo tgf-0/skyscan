@@ -40,7 +40,7 @@ if :skyscan==0 then
 	:listenangle=30
 	// dmsg=:chipfield1+";"+:chipfield2+";"+:chipfield3+";"+:chipfield4
 	// :navinfo=dmsg
-	:navstatus="Inactive."
+	:navstatus="Inactive.\n"+n+" signals found"
 end
 
 // When activated
