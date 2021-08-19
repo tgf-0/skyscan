@@ -1,20 +1,18 @@
-if:skyscan!=0thengoto5end :receiverpitch=0 :sstr=0 :listenangle=30
-b="Last:"
-b+=:chipfield1+";"+:chipfield2+";"+:chipfield3+";"+:chipfield4
-:navinfo=b :navstatus="Inactive"+c
+if:skyscan!=0thengoto4end :receiverpitch=0 :sstr=0 :listenangle=30
+b=:chipfield1+";"+:chipfield2+";"+:chipfield3+";"+:chipfield4
+:navinfo=b :navstatus="Inactive.\n"+c+" signals found."
 if:skyscan!=1thengoto1end d=0 e=-90 f=0
-ife<-90 or e>90thengoto19end :sstr=e
-ifd>90thengoto17end if:skyscan==0thengoto17end
+ife<-90 or e>90thengoto18end :sstr=e
+ifd>90thengoto16end if:skyscan==0thengoto16end
 :receiverpitch=d
-:navstatus="Scanning "+:ssctr+"deg, "+:receivercurrentpitch+"deg"
-if:receivercurrentpitch!=d or :ssctr!=e thengoto8end
-if:message==0thengoto16end f++ g=(1000000-:signalstrength)/1000
-h=:message+", "+g+"KM," iff==1then:chipfield1=h end
+:navstatus="Scanning \n"+:ssctr+"deg, "+:receivercurrentpitch+"deg"
+if:receivercurrentpitch!=d or :ssctr!=e thengoto7end
+if:message==0thengoto15end f++ g=(1000000-:signalstrength)/1000
+h=:message+","+g iff==1then:chipfield1=h end
 iff==2 and h!=:chipfield1 then:chipfield2=h elsei--end
 iff==3 and h!=:chipfield2 then:chipfield3=h elsei--end
-iff==4 and h!=:chipfield3 then:chipfield4=h elsei--end c=""
-d+=30 goto7
+iff==4 and h!=:chipfield3 then:chipfield4=h elsei--end c=f
+d+=30 goto6
 e+=30 if:receivercurrentpitch<0thend=0 :receiverpitch=0end
-if:receivercurrentpitch>=90thend=0end goto6
-ife<=90 and e>=-90thengoto5end
-iff==0thenc="\nNo signals found. Rescan."end :skyscan=0 goto5
+if:receivercurrentpitch>=90thend=0end goto5
+ife>90 or e<-90theniff==0thenc=0end :skyscan=0end goto4

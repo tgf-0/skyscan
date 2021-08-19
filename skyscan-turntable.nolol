@@ -33,10 +33,9 @@ if :skyscan==0 then
 	:receiverpitch=0
 	:sstr=0
 	:listenangle=30
-	dmsg="Last:"
-	dmsg+=:chipfield1+";"+:chipfield2+";"+:chipfield3+";"+:chipfield4
+	dmsg=:chipfield1+";"+:chipfield2+";"+:chipfield3+";"+:chipfield4
 	:navinfo=dmsg
-	:navstatus="Inactive"+ns
+	:navstatus="Inactive.\n"+ns+" signals found."
 end
 
 // When activated
@@ -55,7 +54,7 @@ while :skyscan==1 do
 			
 			// Pitch receiver 
 			p> :receiverpitch=i
-			:navstatus="Scanning "+:ssctr+"deg, "+:receivercurrentpitch+"deg"
+			:navstatus="Scanning \n"+:ssctr+"deg, "+:receivercurrentpitch+"deg"
 			
 			// Wait for receiver to actuate
 			if :receivercurrentpitch!=i or :ssctr!=j then
@@ -66,9 +65,9 @@ while :skyscan==1 do
 			if :message!=0 then
 				signal++
 				dist=(1000000 - :signalstrength)/1000
-				mdata=:message+", "+dist+"KM,"
+				mdata=:message+","+dist
 				store(signal,mdata)
-				ns=""
+				ns=signal
 			end
 			// Pitch in 30° increments
 			i+=30
@@ -88,7 +87,7 @@ while :skyscan==1 do
 	// If we past 90 we're probably done with the scan, break out
 	if j>90 or j<-90 then 
 		if signal==0 then
-			ns="\nNo signals found. Rescan."
+			ns=0
 		end
 		:skyscan=0	
 	end	
