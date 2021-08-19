@@ -1,43 +1,48 @@
 # SkyScan - Basic coordinate reference system
+This is a proof-of-concept location and coordinate system. **It is not meant to replicate or replace ISAN**, which is a much more comprehensive system and you should probably just use that. ISAN is better than this in almost every way. In fact, [here's a link to that](https://isan.to/isan.pdf) because that's probably what you want instead. 
+
+# skyscan-turntable.yolol  
+Controls a single nav receiver, performs scanning and storing of coordinates.
+Works best when your ship is not moving.
 
 ## Requirements:   
-- Nav Receiver with standard fields,   
-    - `Angle` set to 20  
-- A textpanel with device field set to `navinfo`  
-- A button with device field set to `SkyScan`  
-    - `Style` 1  
-- Turret Turntable with device fields:  
-    - SSTT  
-- Memory chip with fields:   
-    - `last_n`  
-    - `last_e`  
-    - `last_w`  
+  
+Run another chip with [skyscan-display.yolol](/skyScan-display.yolol) for displaying info on a text panel
+  
+A working, large nav receiver on a turntable.
 
-
-
-
-# skyscan-turntable.nolol
-
-Turntable version with more comprehensive scanning.  
-Controls receiver, scanning and storing coordinates.  
-Works best when not moving.  
-Nav receiver should be on `frequency`:1  
-Also need to run SkyScan-display.yolol for displaying info  
-Turntable must have device fields:   
-- `SSTR` (Replacing `TurretRotation`)  
-- `SSCTR` (Replace `TurretCurrentRotation`)  
-Memory chip must be default named (`ChipField1`, `ChipField2`, etc)  
-- CF1 is Origin North  
-- CF2 is Origin East  
-- CF3 is Origin West  
-- CF4 is Scan index (for matching coords to a scan run)  
-If running locmark.yolol:  
-- CF5 is Saved Location 1 Origin North  
-- CF6 is Saved Location 1 Origin East  
-- CF7 is Saved Location 1 Origin West  
-- CF8 is Saved Location 2 Origin North  
-- CF9 is Saved Location 2 Origin East  
-- CF10 is Saved Location 2 Origin West  
+Nav receiver should use field `frequency : 1` (default)
+    
+Turntable must have these device fields: 
+  
+- `SSTR` (Replacing `TurretRotation`)
+  
+- `SSCTR` (Replace `TurretCurrentRotation`)
+  
+A memory chip with default device names (`ChipField1`, `ChipField2`, etc)
+  
+- `ChipField1` is Origin North
+  
+- `ChipField2` is Origin East
+  
+- `ChipField3` is Origin West
+  
+- `ChipField4 `is Scan index (for matching coords to a scan run)
+  
+If running [locmark.yolol](/locmark.yolol):
+  
+- `ChipField5` is Saved Location 1 Origin North
+  
+- `ChipField6` is Saved Location 1 Origin East
+  
+- `ChipField7` is Saved Location 1 Origin West
+  
+- `ChipField8` is Saved Location 2 Origin North
+  
+- `ChipField9` is Saved Location 2 Origin East
+  
+- `ChipField10` is Saved Location 2 Origin West
+  
 
 
 
