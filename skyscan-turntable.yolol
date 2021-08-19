@@ -14,6 +14,6 @@ ife==4 and g!=:chipfield3 then:chipfield4=g elseh--end goto15
 :navinfo="Scanning "+:ssctr+"Â°, "+:receivercurrentpitch+"Â°"
 c+=30 goto7
 d+=30 if:receivercurrentpitch<0thenc=0 :receiverpitch=0end
-if:receivercurrentpitch>90thenc=0 goto18end goto6
+if:receivercurrentpitch>90thenc=0end goto6
 ifd>90 or d<-90then:skyscan=0 goto1end
 ifd>90 and e==0then:navinfo="No signals found. Rescan."end goto5

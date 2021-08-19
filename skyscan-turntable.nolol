@@ -81,7 +81,6 @@ while :skyscan==1 do
 		end
 		if :receivercurrentpitch>90 then 
 			i=0
-			break
 		end
 	end
 	// If we past 90 much we're probably done with the scan, break out
