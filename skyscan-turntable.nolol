@@ -28,6 +28,7 @@ ORIGIN_E="origin_east"
 ORIGIN_W="origin_west"
 
 macro store(index, data, dist) block
+	:navinfo=data
 	if data==ORIGIN_N then 
 		sdata="N:"+dist+";"+index
 		if :chipfield1!=sdata then 
@@ -74,10 +75,10 @@ while :skyscan==1 do
 		while i<=90 do
 			// Break for reset or skyscan off
 			if :skyscan==0 then break end
+			:navstatus="Scanning:\n"+n+" signals found"
 			
 			// Pitch receiver 
 			p> :receiverpitch=i
-			:navstatus="Scanning:\n"+n+" signals found"
 			
 			// Wait for receiver to actuate
 			if :receivercurrentpitch!=i or :ssctr!=j then
