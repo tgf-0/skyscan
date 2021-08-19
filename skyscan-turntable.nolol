@@ -3,24 +3,21 @@
 // Works best when not moving.
 // Nav receiver should be on `frequency`:1
 // Also need to run SkyScan-display.yolol for displaying info
-
 // Turntable must have device fields: 
 //  - `SSTR` (Replacing `TurretRotation`)
 //  - `SSCTR` (Replace `TurretCurrentRotation`)
-
 // Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
-// - CF1 = Origin North
-// - CF2 = Origin East
-// - CF3 = Origin West
-// - CF4 = Scan index (for matching coords to a scan run)
-
+// - CF1 is Origin North
+// - CF2 is Origin East
+// - CF3 is Origin West
+// - CF4 is Scan index (for matching coords to a scan run)
 // If running locmark.yolol:
-// - CF5 = Saved Location 1 Origin North
-// - CF6 = Saved Location 1 Origin East
-// - CF7 = Saved Location 1 Origin West
-// - CF8 = Saved Location 2 Origin North
-// - CF9 = Saved Location 2 Origin East
-// - CF10 = Saved Location 2 Origin West
+// - CF5 is Saved Location 1 Origin North
+// - CF6 is Saved Location 1 Origin East
+// - CF7 is Saved Location 1 Origin West
+// - CF8 is Saved Location 2 Origin North
+// - CF9 is Saved Location 2 Origin East
+// - CF10 is Saved Location 2 Origin West
 
 // [Optional] A text panel `NavStatus` for additional scan info
 
