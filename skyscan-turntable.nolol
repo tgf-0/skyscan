@@ -1,13 +1,14 @@
-// Turntable version with more comprehensive scanning
-// Works best when not moving
+// Turntable version with more comprehensive scanning.
 // Controls receiver, scanning and storing coordinates.
-// Nav receiver should be on frequency 1
+// Works best when not moving.
+// Nav receiver should be on `frequency`:1
 // Also need to run SkyScan-display.yolol for displaying info
-// Turntable must have device fields: 
-//  - SSTR (Replacing TurretRotation)
-//  - SSCTR (Replace TurretCurrentRotation)
 
-// Memory chip must be default named (ChipField1, ChipField2, etc)
+// Turntable must have device fields: 
+//  - `SSTR` (Replacing `TurretRotation`)
+//  - `SSCTR` (Replace `TurretCurrentRotation`)
+
+// Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
 // - CF1 = Origin North
 // - CF2 = Origin East
 // - CF3 = Origin West
@@ -27,35 +28,11 @@ ORIGIN_N="origin_north"
 ORIGIN_E="origin_east"
 ORIGIN_W="origin_west"
 
-macro store(index, data, dist) block
-	:navinfo=data
-	if data==ORIGIN_N then 
-		sdata="N:"+dist+";"+index
-		if :chipfield1!=sdata then 
-			:chipfield1=sdata
-			n++
-		end
-	else if data==ORIGIN_E then
-		sdata="E:"+dist+";"+index
-		if :chipfield2!=sdata then 
-			:chipfield2=sdata
-			n++
-		end
-	else if data==ORIGIN_W then
-		sdata="W:"+dist+";"+index
-		if :chipfield3!=sdata then 
-			:chipfield3=sdata
-			n++
-		end
-	end
-end
-// If not active, reset everything
+// If not active, reset
 if :skyscan==0 then
 	:receiverpitch=0
 	:sstr=0
 	:listenangle=30
-	// dmsg=:chipfield1+";"+:chipfield2+";"+:chipfield3+";"+:chipfield4
-	// :navinfo=dmsg
 	:navstatus="Inactive.\n"+n+" signals found"
 end
 
@@ -73,9 +50,10 @@ while :skyscan==1 do
 		:sstr=j
 		// Begin vertical scan
 		while i<=90 do
-			// Break for reset or skyscan off
+			// User cancel, break for reset
 			if :skyscan==0 then break end
-			:navstatus="Scanning:\n"+n+" signals found"
+
+			:navstatus="Scanning...\n"+n+" signals found"
 			
 			// Pitch receiver 
 			p> :receiverpitch=i
@@ -84,11 +62,32 @@ while :skyscan==1 do
 			if :receivercurrentpitch!=i or :ssctr!=j then
 				goto p
 			end
-			
-			// Capture message and Signalstrength as KMs away from your current location
-			if :message!=0 then
+
+			// Capture transmissions from North, East, West origins
+			// Capture SignalStrength as distance (KM) away from current location
+			m=:message
+			if m!=0 then
 				dist=(1000000 - :signalstrength)/1000
-				store(:chipfield4,:message,dist)
+				if m==ORIGIN_N then
+					sdata="N:"+dist+";"+scan_index
+					if :chipfield1!=sdata then
+						:chipfield1=sdata
+						n++
+					end
+				else if m==ORIGIN_E then
+					sdata="E:"+dist+";"+scan_index
+					if :chipfield2!=sdata then
+						:chipfield2=sdata
+						n++
+					end
+				else if m==ORIGIN_W then
+					sdata="W:"+dist+";"+scan_index
+					if :chipfield3!=sdata then
+						:chipfield3=sdata
+						n++
+					end
+				end				
+					
 			end
 			// Pitch in 30° increments
 			i+=30
@@ -105,7 +104,7 @@ while :skyscan==1 do
 			i=0
 		end
 	end
-	// If we past 90 we're probably done with the scan, break out
+	// If we past 90° we're probably done with the scan, break out
 	if j>90 or j<-90 then 
 		:skyscan=0	
 	end	

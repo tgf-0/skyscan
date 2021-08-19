@@ -2,17 +2,16 @@ b="origin_north" c="origin_east" d="origin_west"
 if:skyscan!=0thengoto4end :receiverpitch=0 :sstr=0 :listenangle=30
 :navstatus="Inactive.\n"+e+" signals found"
 if:skyscan!=1thengoto1end f=0 g=-90 e=0 :chipfield4++ h=:chipfield4
-ifg<-90 or g>90thengoto19end :sstr=g
-iff>90thengoto17end if:skyscan==0thengoto17end
-:navstatus="Scanning:\n"+e+" signals found"
+ifg<-90 or g>90thengoto18end :sstr=g
+iff>90thengoto16end if:skyscan==0thengoto16end
+:navstatus="Scanning...\n"+e+" signals found"
 :receiverpitch=f if:receivercurrentpitch!=f or :ssctr!=g thengoto8end
-if:message==0thengoto16end i=(1000000-:signalstrength)/1000
-:navinfo=:message if:message!=j thengoto12end k="N:"+i+";"+:chipfield4
-if:chipfield1!=k then:chipfield1=k l++end goto16
-if:message!=m thengoto14end k="E:"+i+";"+:chipfield4
-if:chipfield2!=k then:chipfield2=k l++end goto16
-if:message!=n thengoto16end k="W:"+i+";"+:chipfield4
-if:chipfield3!=k then:chipfield3=k l++end
+i=:message ifi==0thengoto15end j=(1000000-:signalstrength)/1000
+ifi!=b thengoto12end k="N:"+j+";"+h
+if:chipfield1!=k then:chipfield1=k e++end goto15
+ifi!=c thengoto14end k="E:"+j+";"+h
+if:chipfield2!=k then:chipfield2=k e++end goto15
+ifi==d thenk="W:"+j+";"+h if:chipfield3!=k then:chipfield3=k e++endend
 f+=30 goto6
 g+=30 if:receivercurrentpitch<0thenf=0 :receiverpitch=0end
 if:receivercurrentpitch>=90thenf=0end goto5

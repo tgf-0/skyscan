@@ -19,16 +19,20 @@ cases:
     # optional: global variables to set before running. ':' can be omitted
     inputs:
       skyscan: 1
-      receivercurrentpitch: 0
-      receiverpitch: 0
-      sstr: 0
-      ssctr: 0
-      message: "LOL HEY!"
-      signalstrength: 1234567
+      receivercurrentpitch: 30
+      receiverpitch: 30
+      sstr: 30
+      ssctr: 30
+      message: "origin_east"
+      signalstrength: 900000
+      chipfield1: 0
+      chipfield2: "0"
+      chipfield3: 0
+      chipfield4: 0
     # optional: expected value for global variables after running
     # it he values after execution the scipts do not match the values here, the test fails
     outputs:
-      chipfield1: "LOL HEY!, 1234567"
+      chipfield2: "E:100.00;1"
   # - name: TestOutput2
   #   inputs:
   #     number: 0
