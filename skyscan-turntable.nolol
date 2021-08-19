@@ -1,5 +1,7 @@
 // Turntable version with more comprehensive scanning
+// Works best when not moving
 // Controls receiver, scanning and storing coordinates.
+// Nav receiver should be on frequency 1
 // Also need to run SkyScan-display.yolol for displaying info
 // Turntable must have device fields: 
 //  - SSTR (Replacing TurretRotation)
@@ -82,10 +84,10 @@ while :skyscan==1 do
 				goto p
 			end
 			
-			// Capture messages from origin north, east or west
-			if :message==ORIGIN_N or :message==ORIGIN_E or :message==ORIGIN_W then
+			// Capture message and Signalstrength as KMs away from your current location
+			if :message!=0 then
 				dist=(1000000 - :signalstrength)/1000
-				store(scan_index,:message,dist)
+				store(:chipfield4,:message,dist)
 			end
 			// Pitch in 30° increments
 			i+=30

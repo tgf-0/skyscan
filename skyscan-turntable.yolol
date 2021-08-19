@@ -6,12 +6,12 @@ ifg<-90 or g>90thengoto19end :sstr=g
 iff>90thengoto17end if:skyscan==0thengoto17end
 :receiverpitch=f :navstatus="Scanning:\n"+e+" signals found"
 if:receivercurrentpitch!=f or :ssctr!=g thengoto7end
-if:message!=b and :message!=c and :message!=d thengoto16end
-i=(1000000-:signalstrength)/1000 if:message!=j thengoto12end
-k="N:"+i+";"+h if:chipfield1!=k then:chipfield1=k l++end goto16
-if:message!=m thengoto14end k="E:"+i+";"+h
+if:message==0thengoto16end i=(1000000-:signalstrength)/1000
+if:message!=j thengoto12end k="N:"+i+";"+:chipfield4
+if:chipfield1!=k then:chipfield1=k l++end goto16
+if:message!=m thengoto14end k="E:"+i+";"+:chipfield4
 if:chipfield2!=k then:chipfield2=k l++end goto16
-if:message!=n thengoto16end k="W:"+i+";"+h
+if:message!=n thengoto16end k="W:"+i+";"+:chipfield4
 if:chipfield3!=k then:chipfield3=k l++end
 f+=30 goto6
 g+=30 if:receivercurrentpitch<0thenf=0 :receiverpitch=0end
