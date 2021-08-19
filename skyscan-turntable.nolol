@@ -79,15 +79,15 @@ while :skyscan==1 do
 			i=0
 			:receiverpitch=0
 		end
-		if :receivercurrentpitch>90 then 
+		if :receivercurrentpitch>=90 then 
 			i=0
 		end
 	end
-	// If we past 90 much we're probably done with the scan, break out
+	// If we past 90 we're probably done with the scan, break out
 	if j>90 or j<-90 then 
+		if signal==0 then
+			:chipfield1="No signals found. Rescan." 
+		end
 		:skyscan=0	
-		break
-	end
-	// If you get to the end and there are no signals, move ya ship!
-	if j>90 and signal==0 then :navinfo="No signals found. Rescan." end
+	end	
 end
