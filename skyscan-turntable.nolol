@@ -63,7 +63,7 @@ while :skyscan==1 do
 			if :message!=0 then
 				signal++
 				dist=(1000000 - :signalstrength)/1000
-				mdata=:message+", "+dist+"KM, "+:angle+"°"
+				mdata=:message+", "+dist+"KM, "+:listenangle+"°"
 				store(signal,mdata)
 			else
 				:navinfo="Scanning "+:ssctr+"°, "+:receivercurrentpitch+"°"

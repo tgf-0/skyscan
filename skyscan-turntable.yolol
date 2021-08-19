@@ -3,15 +3,16 @@ b="Inactive. Last:"
 b+=:chipfield1+"\n"+:chipfield2+"\n:"+:chipfield3+"\n"+:chipfield4
 :navinfo=b
 if:skyscan!=1thengoto1end c=0 d=-90 e=0
-ifd<-90 or d>90thengoto18end :sstr=d
-ifc>90thengoto16end if:skyscan==0thengoto16end
+ifd<-90 or d>90thengoto19end :sstr=d
+ifc>90thengoto17end if:skyscan==0thengoto17end
 :receiverpitch=c if:receivercurrentpitch!=c or :ssctr!=d thengoto8end
-if:message==0thengoto14end e++ f=(1000000-:signalstrength)/1000
-g=:message+", "+f+"KM, "+:angle+"Â°" ife==1then:chipfield1=g end
+if:message==0thengoto15end e++ f=(1000000-:signalstrength)/1000
+g=:message+", "+f+"KM, "+:listenangle+"°"
+ife==1then:chipfield1=g end
 ife==2 and g!=:chipfield1 then:chipfield2=g elseh--end
 ife==3 and g!=:chipfield2 then:chipfield3=g elseh--end
-ife==4 and g!=:chipfield3 then:chipfield4=g elseh--end goto15
-:navinfo="Scanning "+:ssctr+"Â°, "+:receivercurrentpitch+"Â°"
+ife==4 and g!=:chipfield3 then:chipfield4=g elseh--end goto16
+:navinfo="Scanning "+:ssctr+"°, "+:receivercurrentpitch+"°"
 c+=30 goto7
 d+=30 if:receivercurrentpitch<0thenc=0 :receiverpitch=0end
 if:receivercurrentpitch>=90thenc=0end goto6
