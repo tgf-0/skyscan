@@ -1,4 +1,3 @@
-if:locmark!=1thengoto4end :o19n=:last_n :o19e=:last_e :o19w=:last_w
-b="\nN:"+:o19n+"KM\nW:"+:o19w+"KM\nE:"+:o19e+"KM" :origin_19=b
-:locmark=0
-if:ssreset==1then:last_e=0 :last_n=0 :last_w=0 :ssreset=0end goto1
+if:locmark!=1thengoto1end :chipfield5=:chipfield1
+:chipfield6=:chipfield2 :chipfield7=:chipfield3 :locmark=0
+:SavedLoc1=:chipfield5+"\n"+:chipfield6+"\n"+:chipfield7 goto1
