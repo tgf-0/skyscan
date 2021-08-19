@@ -1,13 +1,13 @@
 # SkyScan - Basic coordinate reference system
-This is a proof-of-concept location and coordinate system. **It is not meant to replicate or replace ISAN**, which is a much more comprehensive system and you should probably just use that. ISAN is better than this in almost every way. In fact, [here's a link to that](https://isan.to/isan.pdf) because that's probably what you want instead. 
+This is a proof-of-concept location and coordinate system for Starbase ships. **It is not meant to replicate or replace ISAN**, which is a much more comprehensive system and you should probably just use that. ISAN is better than this in almost every way. In fact, [here's a link to that](https://isan.to/isan.pdf) because that's probably what you want instead. 
 
-# skyscan-turntable.yolol  
+# [skyscan-turntable.yolol](SkyScan//Scanner/skyscan-turntable.yolol)
 Controls a single nav receiver, performs scanning and storing of coordinates.
 Works best when your ship is not moving.
 
 ## Requirements:   
   
-Run another chip with [skyscan-display.yolol](/skyScan-display.yolol) for displaying info on a text panel
+Run another chip with [skyscan-display.yolol](SkyScan/Display/skyScan-display.yolol) for displaying info on a text panel
   
 A working, large nav receiver on a turntable.
 
@@ -29,7 +29,7 @@ A memory chip with default device names (`ChipField1`, `ChipField2`, etc)
   
 - `ChipField4 `is Scan index (for matching coords to a scan run)
   
-If running [locmark.yolol](/locmark.yolol):
+If running [locmark.yolol](SkyScan/LocationMark/locmark.yolol):
   
 - `ChipField5` is Saved Location 1 Origin North
   
