@@ -1,7 +1,8 @@
-b=:ChipField1 c=:ChipField2 d=:ChipField3 e=b f=b-";" g=0 h=0
-ifi!=";"theni=e-f e-- f-- g++ goto2end
-ifh<=g thenb-- h++ goto3end j=c k=c-";" l=0 m=0
-ifn!=";"thenn=j-k j-- k-- l++ goto4end
-ifm<=l thenc-- m++ goto5end o=d p=d-";" q=0 r=0
-ifs!=";"thens=o-p o-- p-- q++ goto6end
-ifr<=q thend-- r++ goto7end :ssdisplay=b+"\n"+c+"\n"+d goto1
+b=:ChipField1 c=:ChipField2 d=:ChipField3 e=:ChipField4 f=b g=f-";"
+h=0 i=0 j=""
+ifj!=";"thenj=f-g f-- g-- h++ goto3end
+ifi<=h thenb-- i++ goto4end k=c l=k-";" m=0 n=0 o=""
+ifo!=";"theno=k-l k-- l-- m++ goto5end
+ifn<=m thenc-- n++ goto6end p=d q=p-";" r=0 s=0 t=""
+ift!=";"thent=p-q p-- q-- r++ goto7end
+ifs<=r thend-- s++ goto8end :ssdisplay=b+"\n"+c+"\n"+d goto1
