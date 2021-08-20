@@ -7,7 +7,7 @@ Works best when your ship is not moving.
 
 ## Requirements:   
   
-- Run another chip with [skyscan-display.yolol](SkyScan/Display/skyScan-display.yolol) for displaying info on a text panel
+- Run another chip with [skyscan-display.yolol](SkyScan/Display/skyscan-display.yolol) for displaying info on a text panel
   
 - A working, large nav receiver on a turntable.
 
