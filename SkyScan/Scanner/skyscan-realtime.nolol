@@ -1,0 +1,80 @@
+// Attempt at a realtime version with continuous scanning.
+// Requires more than one Nav Reciever
+// Controls receiver, scanning and storing coordinates.
+// Nav receivers should be on `frequency:1` and `listenangle:180`
+// A Text Panel with device field `:Location`
+// Do not run SkyScan-Display.yolol concurrently, this script will handle its own display.
+// Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
+// - CF1 is Origin North
+// - CF2 is Origin East
+// - CF3 is Origin West
+// - CF4 is Scan index (for matching coords to a scan run)
+// If running locmark.yolol:
+// - CF5 is Saved Location 1 Origin North
+// - CF6 is Saved Location 1 Origin East
+// - CF7 is Saved Location 1 Origin West
+// - CF8 is Saved Location 2 Origin North
+// - CF9 is Saved Location 2 Origin East
+// - CF10 is Saved Location 2 Origin West
+// [Optional] A text panel `NavStatus` for additional scan info
+
+ORIGIN_N="origin_north"
+ORIGIN_E="origin_east"
+ORIGIN_W="origin_west"
+nf=0
+ef=0
+wf=0
+
+// If not active, reset
+if :skyscan==0 then
+	:navstatus="Inactive."
+	:location="Inactive"
+end
+
+if :skyscan==1 then 
+	:navstatus="Scanning.."
+	m=:message
+	// Listen for signals
+	if m!=0 then
+
+		// If we get a signal, figure out which
+		dist=(1000000 - :signalstrength)/1000
+		if m==ORIGIN_N then
+			sdata="N:"+dist
+			if :chipfield1!=sdata then
+				:chipfield1=sdata
+				nf++
+				:navstatus="Scanning..\nOrigin North detected"
+			end
+		else if m==ORIGIN_E then
+			sdata="E:"+dist
+			if :chipfield2!=sdata then
+				:chipfield2=sdata
+				ef++
+				:navstatus="Scanning..\nOrigin East detected"
+			end
+		else if m==ORIGIN_W then
+			sdata="W:"+dist
+			if :chipfield3!=sdata then
+				:chipfield3=sdata
+				wf++
+				:navstatus="Scanning..\nOrigin West detected"
+			end
+		end
+		// Attempt to ensure signals are found around same time						
+		if nf==ef==wf and nf!=0 then
+			:location=:chipfield1+"\n"+:chipfield2+"\n"+:chipfield3
+			:navstatus="Signals acquired.\nLocation good"
+		else if nf<ef and nf<wf then
+			:chipfield1="N:.."
+			:navstatus="Acquire origin_north"
+		else if ef<nf and ef<wf then
+			:chipfield2="E:.."
+			:navstatus="Acquire origin_east"
+		else if wf<nf and wf<ef then
+			:chipfield3="W:.."
+			:navstatus="Acquire origin_west"
+		end
+
+	end
+end
