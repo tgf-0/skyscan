@@ -2,20 +2,31 @@
 // ## Requirements:
 // - A Text Panel set to SSDisplay
 
-macro stripIndex(string) block
-    // Count chars from ';'
+macro stripScanIndex(string) block
+    s=string
+    sdd=string-";"
     count=0
     i=0
-    while a!=";" do
-        a=string---string
+    
+    // Count chars from ';'
+    while o!=";" do
+        o=s-sdd
+        s--
+        sdd--
         count++
     end
-    // strip chars
+    // Reduce string characters by 'count' from end
     while i<=count do
-        ia=string---string
+        string--
+        i++
     end
-    :ssdisplay=ia
 end
 
 north=:ChipField1
-stripIndex(north)
+east=:ChipField2
+west=:ChipField3
+stripScanIndex(north)
+stripScanIndex(east)
+stripScanIndex(west)
+
+:ssdisplay=north+"\n"+east+"\n"+west

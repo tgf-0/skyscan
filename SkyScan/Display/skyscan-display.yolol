@@ -1,3 +1,7 @@
-b=:ChipField1 c=0 d=0
-ife!=";"thene=b---b c++ goto2end
-ifd<=c thenf=b---b goto3end :ssdisplay=f goto1
+b=:ChipField1 c=:ChipField2 d=:ChipField3 e=b f=b-";" g=0 h=0
+ifi!=";"theni=e-f e-- f-- g++ goto2end
+ifh<=g thenb-- h++ goto3end j=c k=c-";" l=0 m=0
+ifn!=";"thenn=j-k j-- k-- l++ goto4end
+ifm<=l thenc-- m++ goto5end o=d p=d-";" q=0 r=0
+ifs!=";"thens=o-p o-- p-- q++ goto6end
+ifr<=q thend-- r++ goto7end :ssdisplay=b+"\n"+c+"\n"+d goto1

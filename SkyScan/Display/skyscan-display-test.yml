@@ -19,15 +19,15 @@ cases:
     # optional: global variables to set before running. ':' can be omitted
     inputs:
       ChipField1: "N:123.123;12"
+      ChipField2: "E:45.123;8"
+      ChipField3: "W:10.1;122"
       ssdisplay: ""
-      b: ""
 
 
     # optional: expected value for global variables after running
     # it he values after execution the scipts do not match the values here, the test fails
     outputs:
-      ssdisplay: "N:123.123"
-      ChipField1: "N:123.123;12"
+      ssdisplay: "N:123.123\nE:45.123\nW:10.1"
   # - name: TestOutput2
   #   inputs:
   #     number: 0
