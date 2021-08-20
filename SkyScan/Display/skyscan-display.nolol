@@ -23,15 +23,16 @@ macro stripScanIndex(string) block
     end
 end
 
-macro checkScanRecency(north,east,west,scanIndex) block
-    nIdx = :ChipField1 - north - ";"
-    eIdx = :ChipField2 - east - ";"
-    wIdx = :ChipField3 - west - ";"
-    nr = scanIndex - nIdx
-    er = scanIndex - eIdx
-    wr = scanIndex - wIdx
-    :G = nr +", " + er + ", " +wr
-end
+// macro checkScanRecency(north,east,west,scanIndex) block
+//     nIdx = :ChipField1 - north - ";"
+//     eIdx = :ChipField2 - east - ";"
+//     wIdx = :ChipField3 - west - ";"
+//     real easy to go from int to string but not the reverse, of course
+//     nr = scanIndex - nIdx
+//     er = scanIndex - eIdx
+//     wr = scanIndex - wIdx
+//     :G = nr +", " + er + ", " +wr
+// end
 
 north=:ChipField1
 east=:ChipField2
@@ -46,7 +47,8 @@ if north!=0 and east!=0 and west!=0 then
     stripScanIndex(west)
 
     // Check if indices are more than 3 scans old
-    checkScanRecency(north,east,west,scanIndex)
+    // Actually can't do this until we can convert string to int...
+    // checkScanRecency(north,east,west,scanIndex)
 
     :ssdisplay=north+"\n"+east+"\n"+west
 else 

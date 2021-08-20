@@ -15,6 +15,14 @@ maxlines: 2000
 chiptype: auto
 # required: list of testcases
 cases:
+  - name: TestIndexRecency
+    inputs:
+      ChipField1: "N:123.123;12"
+      ChipField2: "E:45.123;8"
+      ChipField3: "W:10.10;13"
+      ChipField4: 16
+    outputs:
+      G: "4, 8, 3"
   - name: TestOutput
     # optional: global variables to set before running. ':' can be omitted
     inputs:
@@ -44,11 +52,3 @@ cases:
       ssdisplay: ""
     outputs:
       ssdisplay: "Not enough coords.\nRescan."
-  - name: TestIndexRecency
-    inputs:
-      ChipField1: "N:123.123;12"
-      ChipField2: "E:45.123;8"
-      ChipField3: "W:10.10;13"
-      ChipField4: "16"
-    outputs:
-      G: "4, 8, 3"
