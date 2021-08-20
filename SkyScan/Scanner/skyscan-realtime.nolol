@@ -1,7 +1,7 @@
 // Attempt at a realtime version with continuous scanning.
 // Requires more than one Nav Reciever
 // Controls receiver, scanning and storing coordinates.
-// Nav receivers should be on `frequency:1` and `listenangle:180`
+// Nav receivers should be on `frequency:1` and `listenangle:90`
 // A Text Panel with device field `:Location`
 // Do not run SkyScan-Display.yolol concurrently, this script will handle its own display.
 // Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
@@ -21,22 +21,25 @@
 ORIGIN_N="origin_north"
 ORIGIN_E="origin_east"
 ORIGIN_W="origin_west"
-nf=0
-ef=0
-wf=0
 
 // If not active, reset
 if :skyscan==0 then
-	:navstatus="Inactive."
+	:navstatus="Inactive"
 	:location="Inactive"
+	nf=0
+	ef=0
+	wf=0
+	:chipfield1=0
+	:chipfield2=0
+	:chipfield3=0
 end
 
 if :skyscan==1 then 
 	:navstatus="Scanning.."
 	m=:message
+	:targetmessage=0
 	// Listen for signals
 	if m!=0 then
-
 		// If we get a signal, figure out which
 		dist=(1000000 - :signalstrength)/1000
 		if m==ORIGIN_N then
@@ -44,37 +47,40 @@ if :skyscan==1 then
 			if :chipfield1!=sdata then
 				:chipfield1=sdata
 				nf++
-				:navstatus="Scanning..\nOrigin North detected"
+				:navstatus="Scanning..\n"+m+" detected"
 			end
 		else if m==ORIGIN_E then
 			sdata="E:"+dist
 			if :chipfield2!=sdata then
 				:chipfield2=sdata
 				ef++
-				:navstatus="Scanning..\nOrigin East detected"
+				:navstatus="Scanning..\n"+m+" detected"
 			end
 		else if m==ORIGIN_W then
 			sdata="W:"+dist
 			if :chipfield3!=sdata then
 				:chipfield3=sdata
 				wf++
-				:navstatus="Scanning..\nOrigin West detected"
+				:navstatus="Scanning..\n"+m+" detected"
 			end
 		end
-		// Attempt to ensure signals are found around same time						
-		if nf==ef==wf and nf!=0 then
-			:location=:chipfield1+"\n"+:chipfield2+"\n"+:chipfield3
-			:navstatus="Signals acquired.\nLocation good"
-		else if nf<ef and nf<wf then
-			:chipfield1="N:.."
-			:navstatus="Acquire origin_north"
-		else if ef<nf and ef<wf then
-			:chipfield2="E:.."
-			:navstatus="Acquire origin_east"
-		else if wf<nf and wf<ef then
-			:chipfield3="W:.."
-			:navstatus="Acquire origin_west"
-		end
-
 	end
+	// Attempt to ensure signals are found around same time						
+	if nf==ef==wf and nf!=0 then
+		:location=:chipfield1+"\n"+:chipfield2+"\n"+:chipfield3
+		:navstatus="3 signals acquired"
+	else if nf<ef and nf<wf then
+		:chipfield1="N:.."
+		:navstatus="Acquire "+ORIGIN_N
+		:targetmessage=ORIGIN_N
+	else if ef<nf and ef<wf then
+		:chipfield2="E:.."
+		:navstatus="Acquire "+ORIGIN_E
+		:targetmessage=ORIGIN_E
+	else if wf<nf and wf<ef then
+		:chipfield3="W:.."
+		:navstatus="Acquire "+ORIGIN_W
+		:targetmessage=ORIGIN_W
+	end
+
 end
