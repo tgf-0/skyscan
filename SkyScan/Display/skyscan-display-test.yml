@@ -27,7 +27,7 @@ cases:
     # optional: expected value for global variables after running
     # it he values after execution the scipts do not match the values here, the test fails
     outputs:
-      ssdisplay: "N:123.12\nE:45.12\nW:10.1"
+      ssdisplay: "N:123.123\nE:45.123\nW:10.10"
   # - name: TestOutput2
   #   inputs:
   #     number: 0
@@ -37,23 +37,18 @@ cases:
   #   outputs:
   #      out: "fizzbuzz fizz buzz fizz fizz "
   - name: TestNoCoords
-    # optional: global variables to set before running. ':' can be omitted
     inputs:
       ChipField1: 0
       ChipField2: 0
       ChipField3: "W:10.10;122"
       ssdisplay: ""
-
-
-    # optional: expected value for global variables after running
-    # it he values after execution the scipts do not match the values here, the test fails
     outputs:
       ssdisplay: "Not enough coords.\nRescan."
-  # - name: TestOutput2
-  #   inputs:
-  #     number: 0
-  #   # optional: the global "stopwhen" value from above can be overriden on a per test-case basis
-  #   stopwhen:
-  #     number: 10
-  #   outputs:
-  #      out: "fizzbuzz fizz buzz fizz fizz "
+  - name: TestIndexRecency
+    inputs:
+      ChipField1: "N:123.123;12"
+      ChipField2: "E:45.123;8"
+      ChipField3: "W:10.10;13"
+      ChipField4: "16"
+    outputs:
+      G: "4, 8, 3"

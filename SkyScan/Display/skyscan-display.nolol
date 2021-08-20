@@ -17,10 +17,20 @@ macro stripScanIndex(string) block
         count++
     end
     // Reduce string characters by 'count' from end
-    while i<=count do
+    while i<count do
         string--
         i++
     end
+end
+
+macro checkScanRecency(north,east,west,scanIndex) block
+    nIdx = :ChipField1 - north - ";"
+    eIdx = :ChipField2 - east - ";"
+    wIdx = :ChipField3 - west - ";"
+    nr = scanIndex - nIdx
+    er = scanIndex - eIdx
+    wr = scanIndex - wIdx
+    :G = nr +", " + er + ", " +wr
 end
 
 north=:ChipField1
@@ -29,11 +39,14 @@ west=:ChipField3
 scanIndex=:ChipField4
 
 
-// If no points exist, show error
+// Display coordinates as long as they exist and index isn't out of date
 if north!=0 and east!=0 and west!=0 then
     stripScanIndex(north)
     stripScanIndex(east)
     stripScanIndex(west)
+
+    // Check if indices are more than 3 scans old
+    checkScanRecency(north,east,west,scanIndex)
 
     :ssdisplay=north+"\n"+east+"\n"+west
 else 

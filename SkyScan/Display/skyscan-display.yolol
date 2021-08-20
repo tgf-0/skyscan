@@ -1,9 +1,11 @@
 b=:ChipField1 c=:ChipField2 d=:ChipField3 e=:ChipField4
-ifb==0 or c==0 or d==0thengoto9end f=b g=f-";" h=0 i=0 j=""
+ifb==0 or c==0 or d==0thengoto11end f=b g=f-";" h=0 i=0 j=""
 ifj!=";"thenj=f-g f-- g-- h++ goto3end
-ifi<=h thenb-- i++ goto4end k=c l=k-";" m=0 n=0 o=""
+ifi<h thenb-- i++ goto4end k=c l=k-";" m=0 n=0 o=""
 ifo!=";"theno=k-l k-- l-- m++ goto5end
-ifn<=m thenc-- n++ goto6end p=d q=p-";" r=0 s=0 t=""
+ifn<m thenc-- n++ goto6end p=d q=p-";" r=0 s=0 t=""
 ift!=";"thent=p-q p-- q-- r++ goto7end
-ifs<=r thend-- s++ goto8end :ssdisplay=b+"\n"+c+"\n"+d goto1
+ifs<r thend-- s++ goto8end u=:ChipField1-b-";" v=:ChipField2-c-";"
+w=:ChipField3-d-";" x=e-u y=e-v z=e-w :G=x+", "+y+", "+z
+:ssdisplay=b+"\n"+c+"\n"+d goto1
 :ssdisplay="Not enough coords.\nRescan." goto1
