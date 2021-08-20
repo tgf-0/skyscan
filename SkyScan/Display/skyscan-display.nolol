@@ -1,0 +1,21 @@
+// Displays SkyScan location info.
+// ## Requirements:
+// - A Text Panel set to SSDisplay
+
+macro stripIndex(string) block
+    // Count chars from ';'
+    count=0
+    i=0
+    while a!=";" do
+        a=string---string
+        count++
+    end
+    // strip chars
+    while i<=count do
+        ia=string---string
+    end
+    :ssdisplay=ia
+end
+
+north=:ChipField1
+stripIndex(north)
