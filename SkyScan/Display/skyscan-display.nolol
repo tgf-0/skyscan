@@ -1,6 +1,6 @@
 // Displays SkyScan location info.
 // ## Requirements:
-// - A Text Panel set to SSDisplay
+// - A Text Panel set to SSLocation
 
 macro stripScanIndex(string) block
     s=string
@@ -50,7 +50,7 @@ if north!=0 and east!=0 and west!=0 then
     // Actually can't do this until we can convert string to int...
     // checkScanRecency(north,east,west,scanIndex)
 
-    :ssdisplay=north+"\n"+east+"\n"+west
+    :SSLocation=north+"\n"+east+"\n"+west
 else 
-    :ssdisplay="Not enough coords.\nRescan."
+    :SSLocation="Not enough coords.\nRescan."
 end
