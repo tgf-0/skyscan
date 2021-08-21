@@ -1,13 +1,31 @@
+// Timing based on a .25/sec YOLOL chip read speed. 
+// Velocities are in M/S
+// Assuming 4 clicks==1 sec
 include "std/logic"
 
-// Display velocities relative to origin points
-:Velocity="N:"+vn+"\nE:"+ve+"\nW:"+vw
-:vstatus=time()
+
 
 // Collect coords at time 1
-start=time();calcTime=time()+5;on=:chipfield1;oe=:chipfield2;ow=:chipfield3
+start=time();calcTime=time()+4;on=:chipfield1;oe=:chipfield2;ow=:chipfield3
 
 // Wait and collect coords at time 2
 logic_wait(time()<calcTime);nn=:chipfield1;ne=:chipfield2;nw=:chipfield3
 // Calculate velocities for output display
-vn=(on-nn)/calcTime;ve=(oe-ne)/calcTime;vw=(ow-nw)/calcTime
+td=calcTime-start
+vn=(on*1000-nn*1000)/(td);ve=(oe*1000-ne*1000)/(td);vw=(ow*1000-nw*1000)/(td)
+
+
+// Display velocities relative to origin points
+:Velocity="N:"+vn+"\nE:"+ve+"\nW:"+vw
+
+macro absAdd(vnm,vem,vwm) block
+    if vnm<0 then vnm=-vn end
+    if vem<0 then vem=-vem end
+    if vwm<0 then vwm=-vwm end
+    spd=vnm+vem+vwm
+end
+
+// Speed Indicator, if available
+absAdd(vn,ve,vw)
+:speed=spd
+:Velocity+="\nSpd:"+spd+"m/s"
