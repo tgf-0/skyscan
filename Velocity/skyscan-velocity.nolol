@@ -1,0 +1,13 @@
+include "std/logic"
+
+// Display velocities relative to origin points
+:Velocity="N:"+vn+"\nE:"+ve+"\nW:"+vw
+:vstatus=time()
+
+// Collect coords at time 1
+start=time();calcTime=time()+5;on=:chipfield1;oe=:chipfield2;ow=:chipfield3
+
+// Wait and collect coords at time 2
+logic_wait(time()<calcTime);nn=:chipfield1;ne=:chipfield2;nw=:chipfield3
+// Calculate velocities for output display
+vn=(on-nn)/calcTime;ve=(oe-ne)/calcTime;vw=(ow-nw)/calcTime

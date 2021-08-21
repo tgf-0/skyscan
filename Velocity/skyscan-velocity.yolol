@@ -1,0 +1,4 @@
+a++ :Velocity="N:"+b+"\nE:"+c+"\nW:"+d :vstatus=a
+a++ e=a f=a+5 g=:chipfield1 h=:chipfield2 i=:chipfield3
+a++ ifa<f thengoto3end j=:chipfield1 k=:chipfield2 l=:chipfield3
+a++ b=(g-j)/f c=(h-k)/f d=(i-l)/f goto1
