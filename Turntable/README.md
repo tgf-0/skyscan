@@ -1,5 +1,5 @@
 # [skyscan-turntable.yolol](SkyScan//Scanner/skyscan-turntable.yolol)
-Controls a single nav receiver on a turntable, performs scanning and storing of coordinates. **Do not install with the normal SKYSCAN yolol, this is for a single-receiver setup**
+Controls a single nav receiver on a turntable, performs scanning and storing of coordinates. **Do not install with the normal SKYSCAN yolol, this is for a single-receiver setup ONLY.**
 Works best when your ship is not moving.
 
 ## Requirements:   
