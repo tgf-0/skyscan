@@ -1,3 +1,8 @@
-if:locmark!=1thengoto1end :chipfield5=:chipfield1
-:chipfield6=:chipfield2 :chipfield7=:chipfield3 :locmark=0
-:SavedLoc1=:chipfield5+"\n"+:chipfield6+"\n"+:chipfield7 goto1
+:SavedLoc1="N"+:chipfield5+"\nE:"+:chipfield6+"\nW:"+:chipfield7+"\n"
+:SavedLoc2="N"+:chipfield8+"\nE:"+:chipfield9+"\nW:"+:chipfield10+"\n"
+ifb==1then:SavedLoc1+="^" :SavedLoc2-="^" goto5end
+ifb==2then:SavedLoc1-="^" :SavedLoc2+="^"end
+if:locmark!=1 or b==1thengoto7end :chipfield5=:chipfield1
+:chipfield6=:chipfield2 :chipfield7=:chipfield3 :locmark=0 b=1 goto1
+if:locmark!=1 or b==2thengoto1end :chipfield8=:chipfield1
+:chipfield9=:chipfield2 :chipfield10=:chipfield3 :locmark=0 b=2 goto1

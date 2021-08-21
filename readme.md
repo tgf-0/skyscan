@@ -43,7 +43,11 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
 ## Operation
 Press the `SKYSCAN` button to turn on realtime scanning and coordinate updates. Your `Location` display will show your relative distance (in KM) from the Origin North, Origin East, and Origin West radio transmitters
 
-Press `SKYSCAN` again to turn off and reset (i.e. to save battery/fuel)
+Press `SKYSCAN` again to turn off and reset (i.e. to save battery/fuel).
 
+Press `LOCMARK` button to save a location to longer-term memory. 
+@TODO Cycle locmark savedloc1 and savedloc2
+
+@TODO Speed plugin?
 
 

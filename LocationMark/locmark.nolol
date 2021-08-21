@@ -1,9 +1,24 @@
 // Saves a location to memory, displays to `SavedLoc1`
-if :locmark==1 then
+:SavedLoc1="N"+:chipfield5+"\nE:"+:chipfield6+"\nW:"+:chipfield7+"\n"
+:SavedLoc2="N"+:chipfield8+"\nE:"+:chipfield9+"\nW:"+:chipfield10+"\n"
+if lflag==1 then
+	:SavedLoc1+="^"
+	:SavedLoc2-="^"
+else if lflag==2 then
+	:SavedLoc1-="^"
+	:SavedLoc2+="^"
+end
+if :locmark==1 and lflag!=1 then
 	:chipfield5=:chipfield1
 	:chipfield6=:chipfield2
 	:chipfield7=:chipfield3
 	:locmark=0
-	:SavedLoc1=:chipfield5+"\n"+:chipfield6+"\n"+:chipfield7
+	lflag=1
+else if :locmark==1 and lflag!=2 then
+	:chipfield8=:chipfield1
+	:chipfield9=:chipfield2
+	:chipfield10=:chipfield3
+	:locmark=0
+	lflag=2
 end
 
