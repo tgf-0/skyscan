@@ -1,6 +1,0 @@
-if:out==0then:out=""end
-if:number>5thengoto1end if:number%3!=0 or :number%5!=0thengoto4end
-:out+="fizzbuzz " :another="fizz" goto6
-if:number%3==0then:out+="fizz " goto6end
-if:number%5==0then:out+="buzz "end
-:number++ goto2

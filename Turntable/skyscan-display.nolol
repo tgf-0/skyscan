@@ -1,6 +1,7 @@
 // Displays SkyScan location info.
 // ## Requirements:
 // - A Text Panel set to SSLocation
+// - Use only with Skyscan-Turntable
 
 macro stripScanIndex(string) block
     s=string

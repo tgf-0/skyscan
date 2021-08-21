@@ -1,4 +1,4 @@
-// Attempt at a realtime version with continuous scanning.
+// # SKYSCAN: Realtime Location Coordinate System
 // Requires 3 Nav Recievers
 // Controls receiver, scanning and storing coordinates.
 // Nav receivers should be on `frequency:1` and `listenangle:180`
