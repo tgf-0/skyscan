@@ -1,5 +1,5 @@
 // Saves a location to memory, displays to `SavedLoc1`
-:SavedLoc1="N"+:chipfield5+"\nE:"+:chipfield6+"\nW:"+:chipfield7+"\n"
+:SavedLoc1="N:"+:chipfield5+"\nE:"+:chipfield6+"\nW:"+:chipfield7+"\n"
 :SavedLoc2="N"+:chipfield8+"\nE:"+:chipfield9+"\nW:"+:chipfield10+"\n"
 if lflag==1 then
 	:SavedLoc1+="^"
