@@ -3,8 +3,27 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
 
 ## Installation
 
-  
-### 1. Install Navigation Receivers
+### 1. Install controls and display:
+!["Skyscan console controls"](img/console-controls.png)
+- Add a Hybrid Button with 1st device field set to `SkyScan`
+    - `ButtonStyle : 1`
+- Add a Hybrid Button with 1st device field set to `Locmark`
+- Add a Text Panel with 1st device field `Location`
+- Add a text panel with 1st device field `Velocity`
+- Add a text panel with 1st device field `SavedLoc1`
+- Add a text panel with 1st device field `SavedLoc2`
+
+### 2. Install and connect a YOLOL Device Rack according to the following recommended configuration:
+!["Skyscan YOLOL chip devices"](img/YOLOL-chips-config.png)
+- [skyscan.yolol](/skyscan.yolol) on a Basic YOLOL chip:
+    - The main SKYSCAN program which controls both the receivers and display output.
+- [skyscan-locmark.yolol](LocationMark/skyscan-locmark.yolol) on a Basic YOLOL chip
+    - Save up to two locations in long-term memory.
+- [skyscan-velocity.yolol](Velocity/skyscan-velocity.yolol) on a Basic YOLOL chip
+    - Provides speed and velocity information to panels
+- A blank memory chip with default device field names (`ChipField1`, `ChipField2`, etc)
+
+### 3. Install Navigation Receivers
 !["Receiver Config"](img/receiver-config.png)
 - Place 3 fixed Nav Recievers on hardpoints or turntables, preferably facing different sections of the sky (0°, 120° and 240° are good). Set up each Nav Receiver device fields as follows:
     - Nav Receiver 1
@@ -27,32 +46,7 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
         - Replace `Message` device field with `wsig`  
         - Replace `SignalStrength` field with `wss`
         - `TargetMessage : "origin_west"`
-        - If on turntable, recommend `TurretRotation : 240`
-
-
-
-### 2. Install and connect a YOLOL Device Rack with the following:
-!["Skyscan YOLOL chip devices"](img/YOLOL-chips-config.png)
-- [skyscan.yolol](/skyscan.yolol) on a Basic YOLOL chip:
-    - The main SKYSCAN program which controls both the receivers and display output.
-- [skyscan-locmark.yolol](LocationMark/skyscan-locmark.yolol) on a Basic YOLOL chip
-    - Save up to two locations in long-term memory.
-- [skyscan-velocity.yolol](Velocity/skyscan-velocity.yolol) on a Basic YOLOL chip
-    - Provides speed and velocity information to panels
-- A blank memory chip with default device field names (`ChipField1`, `ChipField2`, etc)
-
-
-### 3. Install controls and display:
-!["Skyscan console controls"](img/console-controls.png)
-- Add a Hybrid Button with 1st device field set to `SkyScan`
-    - `ButtonStyle : 1`
-- Add a Hybrid Button with 1st device field set to `Locmark`
-- Add a Text Panel with 1st device field `Location`
-- Add a text panel with 1st device field `Velocity`
-- Add a text panel with 1st device field `SavedLoc1`
-- Add a text panel with 1st device field `SavedLoc2`
-  
-*<sub>Do not run SkyScan-Display.yolol concurrently, this script will handle its own display.<sub>
+        - If on turntable, recommend `TurretRotation : 240`  
 
   
 ## Operation
