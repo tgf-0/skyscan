@@ -22,57 +22,38 @@
 // [Optional] A text panel `NavStatus` for additional scan info
 
 // Realtime is inaccurate with a single receiver because of how slow YOLOL chips are.
-// Apparently a signal can be lost or another signal found before the a signal's signalstrength can be captured
+// Apparently a signal can be lost or replaced by another signal before that signal's can be captured by YOLOL ops
 
-ORIGIN_N="origin_north"
-ORIGIN_E="origin_east"
-ORIGIN_W="origin_west"
+// ORIGIN_N="origin_north"
+// ORIGIN_E="origin_east"
+// ORIGIN_W="origin_west"
 
 macro display(cf1, cf2, cf3) line
-	:location="\n"+cf1+"\n"+cf2+"\n"+cf3
+	:location="N:"+cf1+"\nE:"+cf2+"\nW:"+cf3
 end
-
-macro statusUpdate(m) line
-	:navstatus="Scanning..\n"+m+" found"
-end
-
-macro getDist(sigs) line
-	sigs=(1000000 - sigs)/1000
-end
-
 
 // If not active, reset
 if :skyscan==0 then
-	:navstatus="Inactive"
+	// :navstatus="Inactive"
 	:location="Inactive"
-	nf=0
-	ef=0
-	wf=0
 	:chipfield1=0
 	:chipfield2=0
 	:chipfield3=0
 end
 
-// :turretrotation+=45
-// if :turretrotation>360 then :turretrotation=0 end
-
 while :skyscan==1 do 
-	:navstatus="Scanning.."
+	// :navstatus="Scanning.."
 	m=:message
-	sigs=0
 	display(:chipfield1,:chipfield2,:chipfield3)
 
 	// Get signal strength from each receiver and store it periodically
 	if :nss!=0 then 
-		// getDist(:nss)
 		:chipfield1=(1000000 - :nss)/1000
 	end
 	if :ess!=0 then 
-		// getDist(:ess)
 		:chipfield2=(1000000 - :ess)/1000
 	end
 	if :wss!=0 then 
-		// getDist(:wss)
 		:chipfield3=(1000000 - :wss)/1000
 	end
 
