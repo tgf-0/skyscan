@@ -1,20 +1,8 @@
 b="origin_north" c="origin_east" d="origin_west"
 if:skyscan!=0thengoto4end :navstatus="Inactive" :location="Inactive"
 e=0 f=0 g=0 :chipfield1=0 :chipfield2=0 :chipfield3=0
-if:skyscan!=1thengoto1end :navstatus="Scanning.." h=:message
-:targetmessage=0 ifh==0thengoto12end i=(1000000-:signalstrength)/1000
-ifh!=b thengoto8end j="N:"+i if:chipfield1==j thengoto12end
-:chipfield1=j e++ :navstatus="Scanning..\n"+h+" detected" goto12
-ifh!=c thengoto10end j="E:"+i if:chipfield2==j thengoto12end
-:chipfield2=j f++ :navstatus="Scanning..\n"+h+" detected" goto12
-ifh!=d thengoto12end j="W:"+i if:chipfield3==j thengoto12end
-:chipfield3=j g++ :navstatus="Scanning..\n"+h+" detected"
-ife==f!=g or e==0thengoto15end
-:location=:chipfield1+"\n"+:chipfield2+"\n"+:chipfield3
-:navstatus="3 signals acquired" goto1
-ife>=f or e>=g thengoto17end :chipfield1="N:.."
-:navstatus="Acquire "+b :targetmessage=b goto1
-iff>=e or f>=g thengoto19end :chipfield2="E:.."
-:navstatus="Acquire "+c :targetmessage=c goto1
-ifg>=e or g>=f thengoto1end :chipfield3="W:.."
-:navstatus="Acquire "+d :targetmessage=d goto1
+if:skyscan!=1thengoto1end :navstatus="Scanning.." h=:message i=0
+:location="\n"+:chipfield1+"\n"+:chipfield2+"\n"+:chipfield3
+if:nss!=0then:chipfield1=(1000000-:nss)/1000end
+if:ess!=0then:chipfield2=(1000000-:ess)/1000end
+if:wss!=0then:chipfield3=(1000000-:wss)/1000end goto4
