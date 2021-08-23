@@ -1,0 +1,73 @@
+// # SKYSCAN: Realtime Location Coordinate System
+// Requires 3 Nav Recievers
+// Controls receiver, scanning and storing coordinates.
+// Nav receivers should be on `frequency:1` and `listenangle:180`
+// Nav receivers should rename message field to nsig, esig and wsig
+// Nav receivers should rename SignalStrength fields to nss, ess and wss
+// Nav receivers should add values of TargetMessage to "origin_north", "origin_east", and "origin_west"
+// A Text Panel with device field `:Location`
+// Do not run SkyScan-Display.yolol concurrently, this script will handle its own display.
+// Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
+// - CF1 is Origin North
+// - CF2 is Origin East
+// - CF3 is Origin West
+// - CF4 is Scan index (for matching coords to a scan run)
+// If running locmark.yolol:
+// - CF5 is Saved Location 1 Origin North
+// - CF6 is Saved Location 1 Origin East
+// - CF7 is Saved Location 1 Origin West
+// - CF8 is Saved Location 2 Origin North
+// - CF9 is Saved Location 2 Origin East
+// - CF10 is Saved Location 2 Origin West
+
+
+// Realtime is inaccurate with a single receiver because of how slow YOLOL chips are.
+// Apparently a signal can be lost or replaced by another signal before that signal's can be captured by YOLOL ops
+
+// Known distances btw transmitters
+NW=91.2
+NE=97
+// EW=120.9
+// Transmitter coordinates - origin_north is the system origin
+// Nx=0
+// Ny=0
+// Nz=0
+Ex=97
+// Ey=0
+// Ez=0
+Wx=16
+Wy=89.7
+// Wz=0
+
+// If not active, reset
+if :skyscan==0 then
+	// :navstatus="Inactive"
+	:location="Inactive"
+	:chipfield1=0
+	:chipfield2=0
+	:chipfield3=0
+end
+
+while :skyscan==1 do 
+	n=:chipfield1
+	e=:chipfield2
+	w=:chipfield3
+
+	// Get signal strength from each receiver and store it periodically
+	if :nss!=0 and :ess!=0 and :wss!=0 then 
+		nd=(1000000-:nss)/1000;ed=(1000000-:ess)/1000;wd=(1000000-:wss)/1000
+		// :chipfield1=n;:chipfield2=e;:chipfield3=w
+
+	end
+
+	// Solve x coord
+	n = (nd*nd - ed*ed + NE*NE)/(2*NE)
+	// Solve y coord
+	e = (nd*nd - wd*wd + Wx*Wx + Wy*Wy - 2*Wy*n)/(2*Ex)
+	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
+	// No good way around it :[
+	w = sqrt(nd*nd - n*n - e*e)
+
+	:location="N:"+n+"\nE:"+e+"\nW:"+w
+
+end

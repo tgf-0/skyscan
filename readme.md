@@ -10,6 +10,7 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
 - Probably inaccurate.
 - Slow-ish, +2s refresh rate
 - Only works up to 1000KM away from Origins
+- Requires advanced chip bc sqrt
 - Ongoing support and updates of this system* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
 
 ## Installation

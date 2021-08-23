@@ -1,0 +1,7 @@
+ b=91.2 c=97 d=97 e=16 f=89.7 if:skyscan!=0thengoto3end
+:location="Inactive" :chipfield1=0 :chipfield2=0 :chipfield3=0
+if:skyscan!=1thengoto1end g=:chipfield1 h=:chipfield2 i=:chipfield3
+if:nss==0 or :ess==0 or :wss==0thengoto6end
+j=(1000000-:nss)/1000 k=(1000000-:ess)/1000 l=(1000000-:wss)/1000
+g=(j*j-k*k+c*c)/(2*c) h=(j*j-l*l+e*e+f*f-2*f*g)/(2*d)
+i=sqrt(j*j-g*g-h*h) :location="N:"+g+"\nE:"+h+"\nW:"+i goto3
