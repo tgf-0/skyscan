@@ -18,5 +18,11 @@ cases:
   - name: TestOutput
     # optional: global variables to set before running. ':' can be omitted
     inputs:
+      :chipfield1: 5
+      :chipfield11: 6
+      :chipfield2: 43
+      :chipfield22: 44
+      :chipfield3: 6
+      :chipfield33: 7
     outputs:
       

@@ -24,9 +24,9 @@
 // Realtime is inaccurate with a single receiver because of how slow YOLOL chips are.
 // Apparently a signal can be lost or replaced by another signal before that signal's can be captured by YOLOL ops
 
-// Known distances btw transmitters
+// Known distances between transmitters
 NW=91.2
-NE=97
+NE=97.1
 // EW=120.9
 // Transmitter coordinates - origin_north is the system origin
 // Nx=0
@@ -56,18 +56,17 @@ while :skyscan==1 do
 	// Get signal strength from each receiver and store it periodically
 	if :nss!=0 and :ess!=0 and :wss!=0 then 
 		nd=(1000000-:nss)/1000;ed=(1000000-:ess)/1000;wd=(1000000-:wss)/1000
-		// :chipfield1=n;:chipfield2=e;:chipfield3=w
 
 	end
 
-	// Solve x coord
+	// Solve Y coord
 	n = (nd*nd - ed*ed + NE*NE)/(2*NE)
-	// Solve y coord
+	// Solve X coord
 	e = (nd*nd - wd*wd + Wx*Wx + Wy*Wy - 2*Wy*n)/(2*Ex)
 	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
 	// No good way around it :[
 	w = sqrt(nd*nd - n*n - e*e)
-
-	:location="N:"+n+"\nE:"+e+"\nW:"+w
+	:chipfield2=n;:chipfield1=e;:chipfield3=w
+	:location="\nX:"+e+"\nY:"+n+"\nZ:"+w
 
 end

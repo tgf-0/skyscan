@@ -1,16 +1,25 @@
-# SKYSCAN - Basic coordinate reference system
+# SKYSCAN - Basic coordinate waypoint system
 This is a proof-of-concept location and coordinate system for Starbase ships. **_It is not meant to replicate or replace ISAN_**, which is a much more comprehensive system and you should probably just use that. ISAN is better than Skyscan in almost every way. In fact, [here's a link to that](https://isan.to/isan.pdf) because that's probably what you want instead. 
 
+## Comparison to ISAN
+- While functionally similar, Skyscan was developed to be more modular and less complex than ISAN. 
+- Skyscan is more of a personal waypoint system, but it can be used as an alternative to ISAN if desired. 
+- Skyscan's coordinate system is different (though it can be easily adapted to be compatible with ISAN coordinates with a simple rotation function). 
+- Skyscan is not as feature-rich and does not have a companion website like https://isan.to, which is a wonderful community resource. 
+- Skyscan is not scalable. In fact it may actually be possible to have a single coordinate refer to two different points in space (though it is unlikely you will encounter these points)
+<small>For the sake of clarity, Skyscan was developed from scratch as a personal waypoint system. All code for this program was developed independently of ISAN and any similarities are purely coincidental.</small>
+
 ## Features
-- 3-point coordinate system ✅
+- 3-point coordinate location system ✅
 - Save up to two locations in memory for reference ✅
-- Highly-requested feature: Velocity! ✅
+- Velocity! ✅
 
 ## Limitations
 - Probably inaccurate.
-- Slow-ish, +2s refresh rate
+- Slow-ish, ~2s refresh rate
 - Only works up to 1000KM away from Origins
 - Requires advanced chip bc sqrt
+- Requires 3 Nav Receivers
 - Ongoing support and updates of this system* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
 
 ## Installation
@@ -64,6 +73,6 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
 ## Operation
 Press the `SKYSCAN` button to turn on "realtime" scanning and coordinate updates (actually about 2-3 seconds behind your real speed and position. YOLOL is slow, yo. LOL). Your `Location` display will show your relative distance (in KM) from the Origin North, Origin East, and Origin West radio transmitters. If your receivers aren't getting a signal, some of your outputs will show a "0". Turn or rotate your ship until the display catches up.
 
-Press `SKYSCAN` again to turn off and reset (i.e. to save battery/fuel).
+Press `SKYSCAN` again to turn off and/or reset.
 
-Press `LOCMARK` button to save a location to longer-term memory. A blinking caret "`^`" will let you know which slot was last saved to.
+Press `LOCMARK` button to save a location to longer-term memory. A blinking caret (`^`) will let you know which slot was last saved to.
