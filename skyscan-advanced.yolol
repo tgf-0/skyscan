@@ -1,8 +1,8 @@
-a=91200 b=97080 c=97080 d=16070 e=89800 if:skyscan!=0thengoto3end
+a=91220 b=97080 c=97080 d=16072 e=89792 if:skyscan!=0thengoto3end
 :location="Inactive" :chipfield1=0 :chipfield2=0 :chipfield3=0
 if:skyscan!=1thengoto1end
-if:nss==0 or :ess==0 or :wss==0thengoto3end f=:nss g=:ess h=:wss
+if:nss!=0 and :ess!=0 and :wss!=0thenf=:nss g=:ess h=:wss end
 i=1000000-f j=1000000-g k=1000000-h l=(i*i-j*j+b*b)/(2*b)
-m=(i*i-k*k+d*d+e*e-2*e*l)/(2*e) n=sqrt(i*i-l*l-m*m)
+m=(i*i-k*k+d*d+e*e-2*d*l)/(2*e) n=sqrt(i*i-l*l-m*m)
 :chipfield3=n :chipfield2=l :chipfield1=m
 :location="\nX:"+l+"\nY:"+m+"\nZ:"+n goto3

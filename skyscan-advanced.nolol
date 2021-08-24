@@ -25,18 +25,18 @@
 // Apparently a signal can be lost or replaced by another signal before that signal's can be captured by YOLOL ops
 
 // Known distances between transmitters
-NW=9120
-NE=9708
+NW=91220
+NE=97080
 // EW=120.9
 // Transmitter coordinates - origin_north is the system origin
 // Nx=0
 // Ny=0
 // Nz=0
-Ex=9708
+Ex=97080
 // Ey=0
 // Ez=0
-Wx=1607
-Wy=8980
+Wx=16072
+Wy=89792
 // Wz=0
 
 // If not active, reset
@@ -52,18 +52,16 @@ while :skyscan==1 do
 	// Get signal strength from each receiver and store it periodically
 	if :nss!=0 and :ess!=0 and :wss!=0 then
 		nss=:nss;ess=:ess;wss=:wss
-		nd=(1000000-nss);ed=(1000000-ess);wd=(1000000-wss)
-
-	
+	end
+	nd=(1000000-nss);ed=(1000000-ess);wd=(1000000-wss)
 
 	// Solve X coord
 	x = (nd*nd - ed*ed + NE*NE)/(2*NE)
 	// Solve X coord
-	y = (nd*nd - wd*wd + Wx*Wx + Wy*Wy - 2*Wy*x)/(2*Wy)
+	y = (nd*nd - wd*wd + Wx*Wx + Wy*Wy - 2*Wx*x)/(2*Wy)
 	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
 	// No good way around it :[
 	z = sqrt((nd*nd) - (x*x) - (y*y))
 	:chipfield3=z;:chipfield2=x;:chipfield1=y
 	:location="\nX:"+x+"\nY:"+y+"\nZ:"+z
-	end
 end
