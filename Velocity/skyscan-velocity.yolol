@@ -1,5 +1,4 @@
-a++ b=:chipfield2 c=:chipfield1 d=:chipfield3 e=a f=a+1
-a++ ifa<f thengoto2end g=:chipfield2 h=:chipfield1 i=:chipfield3
-a++ j=(f-e)*0.2 k=(g-b)*0.2 l=(h-c)*0.2 m=(i-d)*0.2
-a++ n=sqrt(k*k+l*l+m*m)*0.2 o=k/j p=l/j q=m/j r=n/j
-a++ :Velocity="X:"+o+"\nY:"+p+"\nZ:"+q+"\nSp:"+r+"m/s" :Speed=r goto1
+a=:chipfield2 b=:chipfield1 c=:chipfield3 d=0
+d++ ifd<5thengoto2elsee=:chipfield2 f=:chipfield1 g=:chipfield3 end
+h=e-a i=f-b j=g-c k=sqrt(h*h+i*i+j*j)
+:Velocity="X:"+h+"\nY:"+i+"\nZ:"+j+"\nSp:"+k+"m/s" :Speed=k goto1
