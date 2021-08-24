@@ -1,7 +1,7 @@
-if:skyscan!=0thengoto3end :location="Inactive" :chipfield1=0
-:chipfield2=0 :chipfield3=0
-if:skyscan!=1thengoto1end b=:message
-:location="N:"+:chipfield1+"\nE:"+:chipfield2+"\nW:"+:chipfield3
-if:nss!=0then:chipfield1=(1000000-:nss)/1000end
-if:ess!=0then:chipfield2=(1000000-:ess)/1000end
-if:wss!=0then:chipfield3=(1000000-:wss)/1000end goto3
+a=91220 b=97080 c=97080 d=16072 e=89792 if:skyscan!=0thengoto3end
+:location="Inactive" :chipfield1=0 :chipfield2=0 :chipfield3=0
+if:skyscan!=1thengoto1end f=:nss g=:ess h=:wss
+i=1000000-f j=1000000-g k=1000000-h l=(i*i-j*j+b*b)/(2*b)
+m=(i*i-k*k+d*d+e*e-2*d*l)/(2*e) n=sqrt(i*i-l*l-m*m)
+:chipfield3=n :chipfield2=l :chipfield1=m
+:location="\nX:"+l+"\nY:"+m+"\nZ:"+n goto3

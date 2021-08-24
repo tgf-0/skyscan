@@ -19,18 +19,25 @@
 // - CF8 is Saved Location 2 Origin North
 // - CF9 is Saved Location 2 Origin East
 // - CF10 is Saved Location 2 Origin West
-// [Optional] A text panel `NavStatus` for additional scan info
+
 
 // Realtime is inaccurate with a single receiver because of how slow YOLOL chips are.
 // Apparently a signal can be lost or replaced by another signal before that signal's can be captured by YOLOL ops
 
-// ORIGIN_N="origin_north"
-// ORIGIN_E="origin_east"
-// ORIGIN_W="origin_west"
-
-macro display(cf1, cf2, cf3) line
-	:location="N:"+cf1+"\nE:"+cf2+"\nW:"+cf3
-end
+// Known distances between transmitters
+NW=91220
+NE=97080
+// EW=120.9
+// Transmitter coordinates - origin_north is the system origin
+// Nx=0
+// Ny=0
+// Nz=0
+Ex=97080
+// Ey=0
+// Ez=0
+Wx=16072
+Wy=89792
+// Wz=0
 
 // If not active, reset
 if :skyscan==0 then
@@ -42,19 +49,19 @@ if :skyscan==0 then
 end
 
 while :skyscan==1 do 
-	// :navstatus="Scanning.."
-	m=:message
-	display(:chipfield1,:chipfield2,:chipfield3)
-
 	// Get signal strength from each receiver and store it periodically
-	if :nss!=0 then 
-		:chipfield1=(1000000 - :nss)/1000
-	end
-	if :ess!=0 then 
-		:chipfield2=(1000000 - :ess)/1000
-	end
-	if :wss!=0 then 
-		:chipfield3=(1000000 - :wss)/1000
-	end
+	// if :nss!=0 and :ess!=0 and :wss!=0 then
+	nss=:nss;ess=:ess;wss=:wss
+	// end
+	nd=(1000000-nss);ed=(1000000-ess);wd=(1000000-wss)
 
+	// Solve X coord
+	x = (nd*nd - ed*ed + NE*NE)/(2*NE)
+	// Solve X coord
+	y = (nd*nd - wd*wd + Wx*Wx + Wy*Wy - 2*Wx*x)/(2*Wy)
+	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
+	// No good way around it :[
+	z = sqrt((nd*nd) - (x*x) - (y*y))
+	:chipfield3=z;:chipfield2=x;:chipfield1=y
+	:location="\nX:"+x+"\nY:"+y+"\nZ:"+z
 end
