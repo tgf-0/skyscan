@@ -1,6 +1,5 @@
-a++ :Velocity="X:"+b+"\nY:"+c+"\nZ:"+d+"\nSp:"+e+"m/s" :Speed=e
-a++ f=a g=a+4 h=:chipfield2 i=:chipfield1 j=:chipfield3
-a++ ifa<g thengoto3end k=:chipfield2 l=:chipfield1 m=:chipfield3
-a++ ifh==k or i==l or j==m thengoto1end
-a++ n=g-f o=k*1000-h*1000 p=l*1000-i*1000 q=m*1000-j*1000
-a++ r=sqrt(o*o+p*p+q*q) b=o/n c=p/n d=q/n e=r/n goto1
+a++ b=:chipfield2 c=:chipfield1 d=:chipfield3 e=a f=a+5
+a++ ifa<f thengoto2end g=:chipfield2 h=:chipfield1 i=:chipfield3
+a++ j=(f-e)*0.2 k=g-b l=h-c m=i-d n=sqrt(k*k+l*l+m*m)
+a++ o=k*0.2/j p=l*0.2/j q=m*0.2/j r=n*0.2/j
+a++ :Velocity="X:"+o+"\nY:"+p+"\nZ:"+q+"\nSp:"+r+"m/s" :Speed=r goto1

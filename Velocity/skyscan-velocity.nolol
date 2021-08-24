@@ -1,22 +1,20 @@
-// Timing based on a .25/sec YOLOL chip read speed. 
-// Assuming 4 clicks==1 sec, but I might be wrong.
+// Timing based on a .2/sec YOLOL chip read speed. 
+// Skyscan updates coordinates every 5 lines, and this script takes ~5 lines to update,
 // Velocities are in M/S
 include "std/logic"
 
+// Collect coords at time 1
+ox=:chipfield2;oy=:chipfield1;oz=:chipfield3;start=time();calcTime=time()+5
+
+// Wait and collect coords at time 2 (5 clicks, or 1s)
+logic_wait(time()<calcTime);nx=:chipfield2;ny=:chipfield1;nz=:chipfield3
+// Calculate velocities for output display, x0.2 to get in m/s
+td=(calcTime-start)*0.2;dx=(nx-ox);dy=(ny-oy);dz=(nz-oz)
+dist=sqrt((dx*dx) + (dy*dy) + (dz*dz))
+// Assuming 5 clicks==1 sec, but this feels short. Might be wrong.
+vx=dx*0.2/td;vy=dy*0.2/td;vz=dz*0.2/td;spd=dist*0.2/td
 
 // Display velocities relative to origin points
 :Velocity="X:"+vx+"\nY:"+vy+"\nZ:"+vz+"\nSp:"+spd+"m/s"
 // Speed Indicator, if available
 :Speed=spd
-
-// Collect coords at time 1
-start=time();calcTime=time()+4;ox=:chipfield2;oy=:chipfield1;oz=:chipfield3
-
-// Wait and collect coords at time 2
-logic_wait(time()<calcTime);nx=:chipfield2;ny=:chipfield1;nz=:chipfield3
-// Calculate velocities for output display
-if ox!=nx and oy!=ny and oz!=nz then
-    td=calcTime-start;dx=((nx*1000)-(ox*1000));dy=((ny*1000)-(oy*1000));dz=((nz*1000)-(oz*1000))
-    dist=sqrt((dx*dx) + (dy*dy) + (dz*dz))
-    vx=dx/td;vy=dy/td;vz=dz/td;spd=dist/td
-end
