@@ -50,9 +50,9 @@ end
 
 while :skyscan==1 do 
 	// Get signal strength from each receiver and store it periodically
-	if :nss!=0 and :ess!=0 and :wss!=0 then
-		nss=:nss;ess=:ess;wss=:wss
-	end
+	// if :nss!=0 and :ess!=0 and :wss!=0 then
+	nss=:nss;ess=:ess;wss=:wss
+	// end
 	nd=(1000000-nss);ed=(1000000-ess);wd=(1000000-wss)
 
 	// Solve X coord
