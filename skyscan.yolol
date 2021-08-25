@@ -1,7 +1,8 @@
-a=91220 b=97080 c=97080 d=16072 e=89792 if:skyscan!=0thengoto3end
-:location="Inactive" :chipfield1=0 :chipfield2=0 :chipfield3=0
-if:skyscan!=1thengoto1end f=:nss g=:ess h=:wss
-i=1000000-f j=1000000-g k=1000000-h l=(i*i-j*j+b*b)/(2*b)
-m=(i*i-k*k+d*d+e*e-2*d*l)/(2*e) n=sqrt(i*i-l*l-m*m)
-:chipfield3=n :chipfield2=l :chipfield1=m
-:location="\nX:"+l+"\nY:"+m+"\nZ:"+n goto3
+a=61196 b=63233 c=120934 d=-56226 e=28930 f=61196 g=27998
+if:skyscan!=0thengoto4end :location="Inactive" :chipfield1=0
+:chipfield2=0 :chipfield3=0
+if:skyscan!=1thengoto1end h=:nss i=:ess j=:wss k=:gss
+l=1000000-h m=1000000-i n=1000000-j o=1000000-k p=(o*o-n*n+a*a)/(2*a)
+q=(o*o-m*m+d*d+e*e-2*d*p)/(2*e) r=sqrt(o*o-p*p-q*q)
+:chipfield3=r :chipfield2=p :chipfield1=q
+:location="\nX:"+p+"\nY:"+q+"\nZ:"+r goto4

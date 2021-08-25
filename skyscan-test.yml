@@ -1,6 +1,6 @@
 # required: list of scripts to run in parallel. Can be as many as you like
 scripts: 
-  - skyscan-advanced.yolol
+  - skyscan.yolol
 # optional: stop execution once one of the listed global variables has the given value.
 # this is checked after every executed line, which means the line which sets the done-variable is executed completely before stopping the VM
 # default is "done: 1"
@@ -19,8 +19,9 @@ cases:
     # optional: global variables to set before running. ':' can be omitted
     inputs:
       :skyscan: 1
-      :nss: 956836.375
-      :ess: 889735.625
-      :wss: 947004.062
+      :nss: 956809
+      :ess: 889595
+      :wss: 947082
+      :gss: 944217
     outputs:
       
