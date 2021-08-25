@@ -4,6 +4,7 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
 ## Comparison to ISAN
 - While functionally similar, Skyscan was developed to be more modular and less complex than ISAN. 
 - Skyscan is more of a personal waypoint system, but it can be used as an alternative to ISAN if desired. 
+- Skyscan uses a calculation called ["True Range Multilateration"](https://en.wikipedia.org/wiki/True-range_multilateration) to triangulate a ship's position. This is essentially how the GPS in your phone works. The calculation is much simpler and uses the existing origin transmitters as coordinate axes and assigns `origin_gate` as `0,0,0`, rather than inventing an imaginary origin point.
 - Skyscan's coordinate system is different (though it can be easily adapted to be compatible with ISAN coordinates with a simple rotation function). 
 - Skyscan is not as feature-rich and does not have a companion website like https://isan.to, which is a wonderful community resource. 
 - Skyscan is not scalable. In fact it may actually be possible to have a single coordinate refer to two different points in space (though it is unlikely you will encounter these points)

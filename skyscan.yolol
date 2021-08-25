@@ -1,8 +1,8 @@
-a=61196 b=63233 c=120934 d=-56226 e=28930 f=61196 g=27998
+a=61195.125 b=63232.813 c=120934 d=-56228.338 e=28926.849 f=a g=0
 if:skyscan!=0thengoto4end :location="Inactive" :chipfield1=0
 :chipfield2=0 :chipfield3=0
 if:skyscan!=1thengoto1end h=:nss i=:ess j=:wss k=:gss
 l=1000000-h m=1000000-i n=1000000-j o=1000000-k p=(o*o-n*n+a*a)/(2*a)
 q=(o*o-m*m+d*d+e*e-2*d*p)/(2*e) r=sqrt(o*o-p*p-q*q)
-:chipfield3=r :chipfield2=p :chipfield1=q
+:chipfield3=r :chipfield2=q :chipfield1=p
 :location="\nX:"+p+"\nY:"+q+"\nZ:"+r goto4
