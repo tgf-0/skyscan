@@ -20,8 +20,8 @@ cases:
     inputs:
       :skyscan: 1
       :nss: 956809
-      :ess: 889595
-      :wss: 947082
-      :gss: 944217
+      :ess: 889595.5
+      :wss: 947082.312
+      :gss: 944217.25
     outputs:
       

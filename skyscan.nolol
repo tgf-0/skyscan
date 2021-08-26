@@ -27,17 +27,18 @@
 // Known distances between transmitters
 GW=61195.125
 GE=63232.813
+GN=67450.125
 EW=120934
 // EW=120.9
 // Transmitter coordinates - origin_north is the system origin
-// Nx=0
-// Ny=0
+Nx=218.365
+Ny=67449.77
 // Nz=0
-Ex=-56228.338
-Ey=28926.849
+// Ex=-56228.338
+// Ey=28926.849
 // Ez=0
 Wx=GW
-Wy=0
+// Wy=0
 // Wz=0
 
 // If not active, reset
@@ -58,8 +59,8 @@ while :skyscan==1 do
 
 	// Solve X coord
 	x = (gd*gd - wd*wd + GW*GW)/(2*GW)
-	// Solve X coord
-	y = (gd*gd - ed*ed + Ex*Ex + Ey*Ey - 2*Ex*x)/(2*Ey)
+	// Solve Y coord
+	y = (gd*gd - ed*ed + Nx*Nx + Ny*Ny - 2*Nx*x)/(2*Ny)
 	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
 	// No good way around it :[
 	z = sqrt((gd*gd) - (x*x) - (y*y))
