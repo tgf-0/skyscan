@@ -3,6 +3,6 @@ if:skyscan!=0thengoto4end :location="Inactive" :chipfield1=0
 :chipfield2=0 :chipfield3=0
 if:skyscan!=1thengoto1end h=:nss i=:ess j=:wss k=:gss
 l=1000000-h m=1000000-i n=1000000-j o=1000000-k p=(o*o-n*n+a*a)/(2*a)
-q=(o*o-l*l+e*e+f*f-2*e*p)/(2*f) r=sqrt(o*o-p*p-q*q)
-:chipfield3=r :chipfield2=q :chipfield1=p
-:location="\nX:"+p+"\nY:"+q+"\nZ:"+r goto4
+q=(o*o-l*l+e*e+f*f-2*e*p)/(2*f) r=o*o-p*p-q*q ifr<0thenr*=-1end
+s=sqrt r :chipfield3=s :chipfield2=q :chipfield1=p
+:location="\nX:"+p+"\nY:"+q+"\nZ:"+s goto4

@@ -63,7 +63,9 @@ while :skyscan==1 do
 	y = (gd*gd - nd*nd + Nx*Nx + Ny*Ny - 2*Nx*x)/(2*Ny)
 	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
 	// No good way around it :[
-	z = sqrt((gd*gd) - (x*x) - (y*y))
+	zi=(gd*gd) - (x*x) - (y*y) 
+	if zi<0 then zi*=-1 end
+	z = sqrt(zi)
 	:chipfield3=z;:chipfield2=y;:chipfield1=x
 	:location="\nX:"+x+"\nY:"+y+"\nZ:"+z
 end
