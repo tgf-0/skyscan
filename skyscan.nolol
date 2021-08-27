@@ -26,9 +26,9 @@
 
 // Known distances between transmitters
 GW=61195.125
-GE=63232.813
+// GE=63232.813
 GN=67450.125
-EW=120934
+// EW=120934
 // EW=120.9
 // Transmitter coordinates - origin_north is the system origin
 // Nx=218.365
@@ -54,9 +54,9 @@ end
 while :skyscan==1 do 
 	// Get signal strength from each receiver and store it periodically
 	// if :nss!=0 and :ess!=0 and :wss!=0 then
-	nss=:nss;ess=:ess;wss=:wss;gss=:gss
+	nss=:nss;wss=:wss;gss=:gss
 	// end
-	nd=(1000000-nss);ed=(1000000-ess);wd=(1000000-wss);gd=(1000000-gss)
+	nd=(1000000-nss);wd=(1000000-wss);gd=(1000000-gss)
 
 	// Solve X coord
 	x = (gd*gd - wd*wd + GW*GW)/(2*GW)
