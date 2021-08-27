@@ -19,9 +19,9 @@ cases:
     # optional: global variables to set before running. ':' can be omitted
     inputs:
       :skyscan: 1
-      :nss: 999888
+      :nss: 956809
       :ess: 857590.75
-      :wss: 945102.875
-      :gss: 918727.75
+      :wss: 947082
+      :gss: 944217
     outputs:
       

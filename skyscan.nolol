@@ -31,7 +31,8 @@ GN=67450.125
 EW=120934
 // EW=120.9
 // Transmitter coordinates - origin_north is the system origin
-Nx=218.365
+// Nx=218.365
+Nx=0
 Ny=67449.77
 // Nz=0
 // Ex=-56228.338

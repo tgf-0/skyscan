@@ -58,9 +58,9 @@ This is a proof-of-concept location and coordinate system for Starbase ships. **
     - Nav Receiver 2
         - `Frequency : 1`
         - `ListenAngle : 180`
-        - Replace `Message` device field with `esig`  
-        - Replace `SignalStrength` field with `ess`
-        - `TargetMessage : "origin_east"`
+        - Replace `Message` device field with `gsig`  
+        - Replace `SignalStrength` field with `gss`
+        - `TargetMessage : "origin_gate"`
         - If on turntable, recommend `TurretRotation : 120`
     - Nav Receiver 3
         - `Frequency : 1`

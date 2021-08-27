@@ -1,4 +1,4 @@
-a=61195.125 b=63232.813 c=67450.125 d=120934 e=218.365 f=67449.77 g=a
+a=61195.125 b=63232.813 c=67450.125 d=120934 e=0 f=67449.77 g=a
 if:skyscan!=0thengoto4end :location="Inactive" :chipfield1=0
 :chipfield2=0 :chipfield3=0
 if:skyscan!=1thengoto1end h=:nss i=:ess j=:wss k=:gss
