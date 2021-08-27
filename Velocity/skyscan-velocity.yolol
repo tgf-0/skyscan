@@ -1,4 +1,4 @@
-a=:chipfield2 b=:chipfield1 c=:chipfield3 d=0
-d++ ifd<5thengoto2elsee=:chipfield2 f=:chipfield1 g=:chipfield3 end
+a=:chipfield1 b=:chipfield2 c=:chipfield3 d=0
+d++ ifd<5thengoto2elsee=:chipfield1 f=:chipfield2 g=:chipfield3 end
 h=e-a i=f-b j=g-c k=sqrt(h*h+i*i+j*j)
 :Velocity="X:"+h+"\nY:"+i+"\nZ:"+j+"\nSp:"+k+"m/s" :Speed=k goto1
