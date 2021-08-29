@@ -47,6 +47,7 @@ Because of this, **Skyscan's coordinate system is different than ISAN**, though 
 - Add a text panel with 1st device field `Velocity`
 - Add a text panel with 1st device field `SavedLoc1`
 - Add a text panel with 1st device field `SavedLoc2`
+- If desired, add a Progress Bar panel with device field `Speed`
 
 ### 2. Install and connect YOLOL Device Racks according to the following recommended configuration:
 !["Skyscan YOLOL chip devices"](img/YOLOL-chips-config.png)
