@@ -1,6 +1,11 @@
 # SKYSCAN - Personal waypoint coordinate system
 This is a proof-of-concept system for ship location, velocity and displayable waypoints for Starbase ships. **_It is not meant to replicate or replace ISAN_**, which is a much more comprehensive system and you should probably just use that. ISAN is better than SkyScan in almost every way. In fact, [here's a link to that](https://github.com/Collective-SB/ISAN) because that's probably what you want instead. 
 
+## Features
+- 3-point coordinate location system ✅
+- Save up to two locations in memory for reference ✅
+- Velocity! ✅
+
 ## Comparison to ISAN
 - While functionally similar, SkyScan was developed to be more modular and less complex than ISAN. 
 - Skyscan is more of a personal waypoint system, but it can be used as an alternative to ISAN if desired. 
@@ -10,18 +15,12 @@ This is a proof-of-concept system for ship location, velocity and displayable wa
 - Skyscan is not scalable. In fact it may actually be possible to have a single coordinate refer to two different points in space (though it is unlikely you will encounter these points)
 <small>For the sake of clarity, SkyScan was developed from scratch as more of a personal challenge. All code for this program was developed independently of ISAN. Any similarities are purely coincidental.</small>
 
-## Features
-- 3-point coordinate location system ✅
-- Save up to two locations in memory for reference ✅
-- Velocity! ✅
-
 ## Limitations
-- Probably inaccurate.
 - Slow-ish, ~2s refresh rate
 - Only works up to 1000KM away from Origins
-- Requires advanced chip bc sqrt
-- Requires 3 Nav Receivers
-- Ongoing support and updates of this system* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
+- Requires Advanced YOLOL Chip(s)
+- Requires 3 Navigation Receivers
+- Ongoing support and updates of this system is limited* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
 
 ## Installation
 
@@ -29,51 +28,45 @@ This is a proof-of-concept system for ship location, velocity and displayable wa
 !["Skyscan console controls"](img/console-controls.png)
 - Add a Hybrid Button with 1st device field set to `SkyScan`
     - `ButtonStyle : 1`
-- Add a Hybrid Button with 1st device field set to `Locmark`
+- Add a Hybrid Button with 1st device field set to `LocMark`
+    - `ButtonStyle : 1`
 - Add a Text Panel with 1st device field `Location`
 - Add a text panel with 1st device field `Velocity`
 - Add a text panel with 1st device field `SavedLoc1`
 - Add a text panel with 1st device field `SavedLoc2`
 
-### 2. Install and connect a YOLOL Device Rack according to the following recommended configuration:
+### 2. Install and connect YOLOL Device Racks according to the following recommended configuration:
 !["Skyscan YOLOL chip devices"](img/YOLOL-chips-config.png)
-- [skyscan.yolol](/skyscan.yolol) on a Basic YOLOL chip:
-    - The main SKYSCAN program which controls both the receivers and display output.
-- [skyscan-locmark.yolol](LocationMark/skyscan-locmark.yolol) on a Basic YOLOL chip
-    - Save up to two locations in long-term memory.
-- [skyscan-velocity.yolol](Velocity/skyscan-velocity.yolol) on a Basic YOLOL chip
+- [skyscan.yolol](/skyscan.yolol) on an Advanced YOLOL Chip
+- [skyscan-velocity.yolol](Velocity/skyscan-velocity.yolol) on an Advanced YOLOL Chip [optional]
     - Provides speed and velocity information to panels
-- A blank memory chip with default device field names (`ChipField1`, `ChipField2`, etc)
+- [skyscan-locmark.yolol](LocationMark/skyscan-locmark.yolol) on a Basic YOLOL Chip [optional]
+    - Save up to two locations in long-term memory.
+- A blank YOLOL Memory Chip with the default device field names (`ChipField1`, `ChipField2`, etc)
 
 ### 3. Install Navigation Receivers
 !["Receiver Config"](img/receiver-config.png)
-- Place 3 fixed Nav Recievers on hardpoints or turntables, preferably facing different sections of the sky (0°, 120° and 240° are good). Set up each Nav Receiver device fields as follows:
+- Place 3 small or regular Navigation Recievers on hardpoints or turntables. Set up each Nav Receiver device fields as follows:
     - Nav Receiver 1
-        - `Frequency : 1`
-        - `ListenAngle : 180`
-        - Replace `Message` device field with `nsig`  
-        - Replace `SignalStrength` field with `nss`
-        - `TargetMessage : "origin_north"`
-        - If on turntable, recommend `TurretRotation : 0`
+        - Replace `Message` device field name with `nsig`  
+        - Replace `SignalStrength` field name with `nss`
+        - Set `ListenAngle` value to `180`
+        - Set `TargetMessage` value to `"origin_north"`
     - Nav Receiver 2
-        - `Frequency : 1`
-        - `ListenAngle : 180`
-        - Replace `Message` device field with `gsig`  
-        - Replace `SignalStrength` field with `gss`
-        - `TargetMessage : "origin_gate"`
-        - If on turntable, recommend `TurretRotation : 120`
+        - Replace `Message` device field name with `gsig`  
+        - Replace `SignalStrength` field name with `gss`
+        - Set `ListenAngle` value to `180`
+        - Set `TargetMessage` value to `"origin_gate"`
     - Nav Receiver 3
-        - `Frequency : 1`
-        - `ListenAngle : 180`
-        - Replace `Message` device field with `wsig`  
-        - Replace `SignalStrength` field with `wss`
-        - `TargetMessage : "origin_west"`
-        - If on turntable, recommend `TurretRotation : 240`  
+        - Replace `Message` device field name with `wsig`  
+        - Replace `SignalStrength` field name with `wss`
+        - Set `ListenAngle` value to `180`
+        - Set `TargetMessage` value to `"origin_west"`
 
   
 ## Operation
-Press the `SKYSCAN` button to turn on "realtime" scanning and coordinate updates (actually about 2-3 seconds behind your real speed and position. YOLOL is slow, yo. LOL). Your `Location` display will show your relative distance (in KM) from the Origin North, Origin East, and Origin West radio transmitters. If your receivers aren't getting a signal, some of your outputs will show a "0". Turn or rotate your ship until the display catches up.
+Press the `SKYSCAN` button to turn on scanning and location. Your `Location` display will show your X,Y and Z coordinates. The `Velocity` display shows your velocity in each coordinate direction and overall speed. Negative values indicate you are traveling toward the `origin_gate` station.
 
 Press `SKYSCAN` again to turn off and/or reset.
 
-Press `LOCMARK` button to save a location to longer-term memory. A blinking caret (`^`) will let you know which slot was last saved to.
+Press `LOCMARK` button to save a location to longer-term memory. A blinking caret (`^`) indicates which memory slot will be written to next.
