@@ -31,9 +31,11 @@ Because of this, **Skyscan's coordinate system is different than ISAN**, though 
 - Requires at least one Advanced YOLOL Chip (two if using the Velocity plugin)
 - Requires 3 Navigation Receivers
 - Skyscan is not scalable. In fact it may actually be possible to have a single coordinate refer to two different points in space (though it is unlikely you will encounter these points)
+- No one's checked my math, yet.
 - Ongoing support and updates of this system is limited* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
 
 ## Installation
+(Steps can be perfomed in any order)
 
 ### 1. Install controls and display:
 !["Skyscan console controls"](img/console-controls.png)
@@ -74,7 +76,8 @@ Because of this, **Skyscan's coordinate system is different than ISAN**, though 
         - Set `ListenAngle` value to `180`
         - Set `TargetMessage` value to `"origin_west"`
 
-  
+<small>Note: if nav receivers aren't working correctly after first installing, you may need to restart your game.</small>
+
 ## Operation
 Press the `SKYSCAN` button to turn on scanning and location. Your `Location` display will show your X,Y and Z coordinates. The `Velocity` display shows your velocity in each coordinate direction and overall speed. Negative values indicate you are traveling toward the `origin_gate` station.
 
