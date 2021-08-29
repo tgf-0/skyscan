@@ -1,36 +1,33 @@
-// # SKYSCAN: Realtime Location Coordinate System
-// Requires 3 Nav Recievers
-// Controls receiver, scanning and storing coordinates.
-// Nav receivers should be on `frequency:1` and `listenangle:180`
-// Nav receivers should rename message field to nsig, esig and wsig
-// Nav receivers should rename SignalStrength fields to nss, ess and wss
-// Nav receivers should add values of TargetMessage to "origin_north", "origin_east", and "origin_west"
-// A Text Panel with device field `:Location`
-// Do not run SkyScan-Display.yolol concurrently, this script will handle its own display.
-// Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
-// - CF1 is Origin North
-// - CF2 is Origin East
-// - CF3 is Origin West
-// - CF4 is Scan index (for matching coords to a scan run)
+// # SKYSCAN: Personal Waypoint Coordinate System
+
+// skycan.yolol: Controls receiver, scanning and storing coordinates.
+// ## Requirements: 3 Nav Recievers
+// - Nav receivers should be on `frequency:1` and `listenangle:180`
+// - Nav receivers should rename message field to nsig, gsig and wsig
+// - Nav receivers should rename SignalStrength fields to nss, gss and wss
+// - Nav receivers should add values of TargetMessage to "origin_north", "origin_gate", and "origin_west"
+// - A Text Panel with device field `:Location`
+
+// - Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
+// 	- CF1 is Origin X
+// 	- CF2 is Origin Y
+// 	- CF3 is Origin Z
+// 	- CF4 is no longer used
 // If running locmark.yolol:
-// - CF5 is Saved Location 1 Origin North
-// - CF6 is Saved Location 1 Origin East
-// - CF7 is Saved Location 1 Origin West
-// - CF8 is Saved Location 2 Origin North
-// - CF9 is Saved Location 2 Origin East
-// - CF10 is Saved Location 2 Origin West
-
-
-// Realtime is inaccurate with a single receiver because of how slow YOLOL chips are.
-// Apparently a signal can be lost or replaced by another signal before that signal's can be captured by YOLOL ops
+// 	- CF5 is Saved Location 1 Origin X
+// 	- CF6 is Saved Location 1 Origin Y
+// 	- CF7 is Saved Location 1 Origin Z
+// 	- CF8 is Saved Location 2 Origin X
+// 	- CF9 is Saved Location 2 Origin Y
+// 	- CF10 is Saved Location 2 Origin Z
 
 // Known distances between transmitters
 GW=61195.125
 // GE=63232.813
 GN=67450.125
 // EW=120934
-// EW=120.9
-// Transmitter coordinates - origin_north is the system origin
+
+// Transmitter coordinates - origin_gate is the coordinate system (0,0,0)
 // Nx=218.365
 Nx=0
 Ny=GN
@@ -44,7 +41,6 @@ Wx=GW
 
 // If not active, reset
 if :skyscan==0 then
-	// :navstatus="Inactive"
 	:location="Inactive"
 	:chipfield1=0
 	:chipfield2=0
@@ -52,21 +48,22 @@ if :skyscan==0 then
 end
 
 while :skyscan==1 do 
-	// Get signal strength from each receiver and store it periodically
-	// if :nss!=0 and :ess!=0 and :wss!=0 then
+	// Get signal strength from each receiver and store it each loop
 	nss=:nss;wss=:wss;gss=:gss
-	// end
 	nd=(1000000-nss);wd=(1000000-wss);gd=(1000000-gss)
 
 	// Solve X coord
 	x = (gd*gd - wd*wd + GW*GW)/(2*GW)
 	// Solve Y coord
 	y = (gd*gd - nd*nd + Nx*Nx + Ny*Ny - 2*Nx*x)/(2*Ny)
-	// Solve fucking Z coord this is the ONLY line that requires adv chip. 
-	// No good way around it :[
+	// Solve Z coordinate. This is the ONLY line that requires adv chip. 
+	// There's no good way around it :[
 	zi=(gd*gd) - (x*x) - (y*y) 
+	// There are actually two solutions to every calculation. 
+	//  Guessing that most players will be Z+
 	if zi<0 then zi*=-1 end
 	z = sqrt(zi)
 	:chipfield3=z;:chipfield2=y;:chipfield1=x
+	// Display
 	:location="\nX:"+x+"\nY:"+y+"\nZ:"+z
 end
