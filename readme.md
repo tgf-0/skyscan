@@ -1,5 +1,6 @@
-# SKYSCAN - Personal waypoint coordinate system
-This is a proof-of-concept system for ship location, velocity and displayable waypoints for Starbase ships. **_It is not meant to replicate or replace ISAN_**, which is a much more comprehensive system and you should probably just use that. ISAN is better than SkyScan in almost every way. In fact, [here's a link to that](https://github.com/Collective-SB/ISAN) because that's probably what you want instead. 
+# SkyScan
+## Coordinate Waypoint System
+This is a proof-of-concept system for ship location, velocity and displayable waypoints for Starbase ships. It is not meant to replicate or replace ISAN, which is a much more comprehensive system and you should probably just use that. ISAN is better than SkyScan in almost every way. In fact, [here's a link to that](https://github.com/Collective-SB/ISAN) because that's probably what you want instead. 
 
 ## Features
 - 3-point coordinate location system ✅
@@ -7,18 +8,22 @@ This is a proof-of-concept system for ship location, velocity and displayable wa
 - Velocity! ✅
 
 ## Comparison to ISAN
-- While functionally similar, SkyScan was developed to be more modular and less complex than ISAN. 
+<img src="img/Skyscan-vs-ISAN-axes.png" width=600></img>
+
+SkyScan was developed from scratch as a kind of personal challenge that turned out better than expected, so I have decided to publish the code. All code for this system was developed independently of ISAN, and any similarities are purely coincidental.
+- While functionally similar to ISAN, SkyScan was developed to modular and simple. 
 - Skyscan is more of a personal waypoint system, but it can be used as an alternative to ISAN if desired. 
-- Skyscan uses a calculation called ["True Range Multilateration"](https://en.wikipedia.org/wiki/True-range_multilateration) to triangulate a ship's position. This is essentially how the GPS in your phone works. The calculation is much simpler and uses the [existing origin transmitters as coordinate axes](img/Skyscan-vs-ISAN-axes.png) and assigns `origin_gate` as `0,0,0`, rather than inventing an imaginary origin point and axes.
-- **Skyscan's coordinate system is different** (though it can be adapted to be compatible with ISAN coordinates with a rotation function. Please feel free to contribute code if you find an easy way to do this). More specifically, [Skyscan uses the transmitters as the coordinate axes](img/Skyscan-vs-ISAN-axes.png). This _greatly_ simplifies the position calculation - SkyScan can run in just 7 lines of YOLOL!
+- Skyscan uses a calculation called ["True Range Multilateration"](https://en.wikipedia.org/wiki/True-range_multilateration) to triangulate a ship's position, assiging `origin_gate` as `(0,0,0)` rather than inventing an imaginary origin point and axes. This is essentially how the GPS in your phone works. 
+- Because of this, **Skyscan's coordinate system is different than ISAN**, though it's entirely possible to convert Skyscan coords to ISAN-compatible coordinates with a translate and rotate function. Please feel free to contribute code if you find an easy way to do this. 
+    - Since [**Skyscan uses the transmitters as the coordinate axes**](img/Skyscan-vs-ISAN-axes.png), it _greatly_ simplifies the position calculation - SkyScan can run in just 7 lines of YOLOL!
 - Skyscan is not as feature-rich and does not have a companion website like https://isan.to, which is a wonderful community resource. 
 - Skyscan is not scalable. In fact it may actually be possible to have a single coordinate refer to two different points in space (though it is unlikely you will encounter these points)
-<small>For the sake of clarity, SkyScan was developed from scratch as more of a personal challenge. All code for this program was developed independently of ISAN. Any similarities are purely coincidental.</small>
+
 
 ## Limitations
-- Slow-ish, ~2s refresh rate
+- Slow-ish, ~2 second refresh delay
 - Only works up to 1000KM away from Origins
-- Requires Advanced YOLOL Chip(s)
+- Requires at least 1 Advanced YOLOL Chip (2 if using the Velocity plugin)
 - Requires 3 Navigation Receivers
 - Ongoing support and updates of this system is limited* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
 
