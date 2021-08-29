@@ -17,6 +17,7 @@ This is a proof-of-concept system for ship location, velocity and waypoints for 
 - Ongoing support and updates of this system is limited* <br><small>*The author has a full-time job, a newborn baby, and is finishing graduate certificate courses. What little free time is left will probably be spent actually trying to playing the game.</small>
 
 ## Installation
+[Here's a quick video walkthrough](https://youtu.be/FotnVAZBSXs), but you'll want to read through the instructions as well.
 
 ### 1. Install Navigation Receivers
 !["Receiver Config"](img/receiver-config.png)
