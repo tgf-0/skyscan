@@ -1,8 +1,0 @@
-a=66662.12 b=66662.12 c=66662.12 d=120944 e=3468 f=66406 g=a
-if:skyscan!=0thengoto4end :location="Inactive" :chipfield1=0
-:chipfield2=0 :chipfield3=0
-if:skyscan!=1thengoto1end h=:nss i=:ess j=:wss k=:gss
-l=1000000-h m=1000000-i n=1000000-j o=1000000-k p=(o*o-n*n+q*q)/(2*q)
-r=(o*o-m*m+e*e+f*f-2*e*p)/(2*f) s=sqrt(o*o-p*p-r*r)
-:chipfield3=s :chipfield2=r :chipfield1=p
-:location="\nX:"+p+"\nY:"+r+"\nZ:"+s goto4

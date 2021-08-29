@@ -1,7 +1,0 @@
-if:skyscan!=0thengoto3end :location="Inactive" :chipfield1=0
-:chipfield2=0 :chipfield3=0
-if:skyscan!=1thengoto1end b=:message
-:location="N:"+:chipfield1+"\nE:"+:chipfield2+"\nW:"+:chipfield3
-if:nss!=0then:chipfield1=(1000000-:nss)/1000end
-if:ess!=0then:chipfield2=(1000000-:ess)/1000end
-if:wss!=0then:chipfield3=(1000000-:wss)/1000end goto3

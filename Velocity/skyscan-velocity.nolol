@@ -5,7 +5,8 @@
 
 // Collect coords at time 1
 ox=:chipfield1;oy=:chipfield2;oz=:chipfield3;i=0
-// Assuming 5 clicks==1 sec, but this feels short. Might be wrong.
+
+// Assumed 5 clicks==1 sec, but this feels short. Might be wrong.
 // Wait and collect coords at time 2 (5 clicks, or 1s)
 inc> i++ 
 if i<5 then goto inc else nx=:chipfield1;ny=:chipfield2;nz=:chipfield3 end

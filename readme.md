@@ -11,7 +11,7 @@ This is a proof-of-concept system for ship location, velocity and displayable wa
 <img src="img/Skyscan-vs-ISAN-axes.png" width=600></img>
 
 SkyScan was developed from scratch as a kind of personal challenge that turned out better than expected, so I have decided to publish the code. All code for this system was developed independently of ISAN, and any similarities are purely coincidental.
-- While functionally similar to ISAN, SkyScan was developed to modular and simple. 
+- While functionally similar to ISAN, SkyScan was developed to be modular and simple. 
 - Skyscan is more of a personal waypoint system, but it can be used as an alternative to ISAN if desired. 
 - Skyscan uses a calculation called ["True Range Multilateration"](https://en.wikipedia.org/wiki/True-range_multilateration) to triangulate a ship's position, assiging `origin_gate` as `(0,0,0)` rather than inventing an imaginary origin point and axes. This is essentially how the GPS in your phone works. 
 - Because of this, **Skyscan's coordinate system is different than ISAN**, though it's entirely possible to convert Skyscan coords to ISAN-compatible coordinates with a translate and rotate function. Please feel free to contribute code if you find an easy way to do this. 
