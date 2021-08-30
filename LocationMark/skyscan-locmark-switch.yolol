@@ -1,0 +1,8 @@
+:SavedLoc1="X:"+:chipfield5+"\nY:"+:chipfield6+"\nZ:"+:chipfield7
+:SavedLoc2="X:"+:chipfield8+"\nY:"+:chipfield9+"\nZ:"+:chipfield10
+if:lmswitch==1then:SavedLoc1+="\n^" :SavedLoc2-="\n^" goto5end
+if:lmswitch==-1then:SavedLoc1-="\n^" :SavedLoc2+="\n^"end
+if:locmark!=1 or :lmswitch!=1thengoto7end :chipfield5=:chipfield1
+:chipfield6=:chipfield2 :chipfield7=:chipfield3 :locmark=0 goto1
+if:locmark!=1 or :lmswitch!=-1thengoto1end :chipfield8=:chipfield1
+:chipfield9=:chipfield2 :chipfield10=:chipfield3 :locmark=0 goto1
