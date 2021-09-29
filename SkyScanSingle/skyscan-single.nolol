@@ -1,7 +1,7 @@
 // # SKYSCAN: Personal Waypoint Coordinate System
 
-// skycan-single.yolol: Controls receiver, scanning and storing coordinates with a single reciever
-// ## Requirements: 1 Nav Reciever
+// skycan-single.yolol: Controls receiver, scanning and storing coordinates with a single receiver
+// ## Requirements: 1 Nav receiver
 // - Nav receivers should be on `frequency:1` and `listenangle:180`
 
 // - A Text Panel with device field `:Location`
@@ -10,8 +10,8 @@
 // 	- CF1 is Origin X
 // 	- CF2 is Origin Y
 // 	- CF3 is Origin Z
-// Can't use locmark function for single reciever/single mem chip,
-// These fields are used as a helper for the single reciever:
+// Can't use locmark function for single receiver/single mem chip,
+// These fields are used as a helper for the single receiver:
 // 	- CF4 is raw gate signal strength
 // 	- CF5 is raw north signal strength
 // 	- CF6 is raw west signal strength 
