@@ -1,0 +1,8 @@
+a=61195.125 b=67450.125 c=0 d=b e=a f="origin_gate" g="origin_north"
+h="origin_west" :TargetMessage=f :chipfield4=:signalstrength
+i=:chipfield4 :TargetMessage=g :chipfield5=:signalstrength
+j=:chipfield5 :TargetMessage=h :chipfield6=:signalstrength
+k=:chipfield6 l=1000000-j m=1000000-k n=1000000-i
+o=(n*n-m*m+a*a)/(2*a) p=(n*n-l*l+c*c+d*d-2*c*o)/(2*d) q=n*n-o*o-p*p
+ifq<0thenq*=-1end r=sqrt q :chipfield3=r :chipfield2=p :chipfield1=o
+:location="\nX:"+o+"\nY:"+p+"\nZ:"+r goto1

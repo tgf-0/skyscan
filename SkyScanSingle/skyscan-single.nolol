@@ -1,0 +1,70 @@
+// # SKYSCAN: Personal Waypoint Coordinate System
+
+// skycan-single.yolol: Controls receiver, scanning and storing coordinates with a single reciever
+// ## Requirements: 1 Nav Reciever
+// - Nav receivers should be on `frequency:1` and `listenangle:180`
+
+// - A Text Panel with device field `:Location`
+
+// - Memory chip must be default named (`ChipField1`, `ChipField2`, etc)
+// 	- CF1 is Origin X
+// 	- CF2 is Origin Y
+// 	- CF3 is Origin Z
+// Can't use locmark function for single reciever/single mem chip,
+// These fields are used as a helper for the single reciever:
+// 	- CF4 is raw gate signal strength
+// 	- CF5 is raw north signal strength
+// 	- CF6 is raw west signal strength 
+
+// Known distances between transmitters
+GW=61195.125
+// GE=63232.813
+GN=67450.125
+// EW=120934
+
+// Transmitter coordinates - origin_gate is the coordinate system (0,0,0)
+// Nx=218.365
+Nx=0
+Ny=GN
+// Nz=0
+// Ex=-56228.338
+// Ey=28926.849
+// Ez=0
+Wx=GW
+// Wy=0
+// Wz=0
+TOG="origin_gate"
+TON="origin_north"
+TOW="origin_west"
+// If not active, reset
+// if :skyscan==0 then
+// 	:location="Inactive"
+// 	:chipfield1=0
+// 	:chipfield2=0
+// 	:chipfield3=0
+// end
+
+// Get signal strength from receiver and store it each loop
+:TargetMessage=TOG; :chipfield4=:signalstrength
+gss=:chipfield4
+:TargetMessage=TON; :chipfield5=:signalstrength
+nss=:chipfield5
+:TargetMessage=TOW; :chipfield6=:signalstrength
+wss=:chipfield6
+nd=1000000-nss; wd=1000000-wss; gd=1000000-gss
+
+// Solve X coord
+x=(gd*gd-wd*wd+GW*GW)/(2*GW)
+// Solve Y coord
+y=(gd*gd-nd*nd+Nx*Nx+Ny*Ny-2*Nx*x)/(2*Ny)
+// Solve Z coordinate. This is the ONLY line that requires adv chip. 
+// There's no good way around it :[
+zi=gd*gd-x*x-y*y
+// There are actually two solutions to every calculation. 
+//  Guessing that most players will be Z+
+if zi<0 then zi*=-1 end
+z=sqrt(zi)
+:chipfield3=z; :chipfield2=y; :chipfield1=x
+// Display
+:location="\nX:"+x+"\nY:"+y+"\nZ:"+z
+

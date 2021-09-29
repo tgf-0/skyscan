@@ -50,14 +50,18 @@ This is a proof-of-concept system for ship location, velocity and waypoints for 
 - Add a text panel with 1st device field `SavedLoc2`
 - If desired, add a Progress Bar panel with device field `Speed`
     - `PaneMaxValue: 150`
+- A Switch 12x24 button to control save slots <sup style="color:darkred">new!</sup>
+    - Replace SwitchState with `LMSwitch`
+    - `SwitchStyle : 2`
 
 ### 3. Install and connect YOLOL Device Racks according to the following recommended configuration:
 !["Skyscan YOLOL chip devices"](img/YOLOL-chips-config.png)
 - [skyscan.yolol](/skyscan.yolol) on an Advanced YOLOL Chip
 - [skyscan-velocity.yolol](Velocity/skyscan-velocity.yolol) on an Advanced YOLOL Chip
     - Provides speed and velocity information to panels
-- [skyscan-locmark.yolol](LocationMark/skyscan-locmark.yolol) on a Basic YOLOL Chip
+- [skyscan-locmark-switch.yolol](LocationMark/skyscan-locmark-switch.yolol) on a Basic YOLOL Chip
     - Save up to two locations in long-term memory.
+    - (Note: You could use [skyscan-locmark-cycle.yolol](LocationMark/skyscan-locmark-cycle.yolol) instead and leave out the switch control. This will cycle between the two save slots.
 - A blank YOLOL Memory Chip with the default device field names (`ChipField1`, `ChipField2`, etc)
 
 
