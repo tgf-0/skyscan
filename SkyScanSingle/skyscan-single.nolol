@@ -45,12 +45,13 @@ TOW="origin_west"
 // end
 
 // Get signal strength from receiver and store it each loop
-:TargetMessage=TOG; :chipfield4=:signalstrength
-gss=:chipfield4
-:TargetMessage=TON; :chipfield5=:signalstrength
-nss=:chipfield5
-:TargetMessage=TOW; :chipfield6=:signalstrength
-wss=:chipfield6
+n> :TargetMessage=TON; :chipfield4=:signalstrength; nss=:chipfield4
+// Ensure each value is correct
+if :chipfield4!=:signalstrength then goto n end
+w> :TargetMessage=TOW; :chipfield5=:signalstrength;wss=:chipfield5
+if :chipfield5!=:signalstrength then goto w end
+g> :TargetMessage=TOG; :chipfield6=:signalstrength; gss=:chipfield6
+if :chipfield6!=:signalstrength then goto g end
 nd=1000000-nss; wd=1000000-wss; gd=1000000-gss
 
 // Solve X coord
